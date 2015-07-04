@@ -14,7 +14,6 @@ if (!isset($_SESSION['auth'])) {
     	<?php include "blocks/leftmenu.php";?>
     	<?php include "blocks/sectiontop.php";?>
     	<?php include "blocks/sectionmain.php";?>
-    	<?php include "blocks/footer.php";?>
     	<!-- connect script files -->
     	<?php include "blocks/script.php" ?>
 	</body>
