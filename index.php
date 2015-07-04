@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['auth'])) {
+    header('Location: signin.php');
+}
+?>
 <!DOCTYPE html>
 <!-- Building blocks sent to separate php files in folder "/blocks/" -->
 <html lang="en">

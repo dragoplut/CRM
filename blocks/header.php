@@ -16,6 +16,10 @@
         <li><a href="">Settings</a></li>
         <li><a href="">Profile</a></li>
         <li><a href="">Help</a></li>
+        <li><a href="blocks/logout.php" type="submit" name="submit">Log out 
+          <img src="img/logoutdoorsm.png">        
+          </a>
+        </li>
       </ul>
       <form class="navbar-form navbar-right">
         <input type="text" class="form-control" placeholder="Search...">

@@ -17,11 +17,12 @@ session_start();
 
 if (isset($_POST['login']) && isset($_POST['pass']))
 {
-if ($_POST['login']==='admin' && $_POST['pass']==='pwd') {
-	$_SESSION['auth']='1'
-	header('Location: index.php');
-	exit;
-}
+	if ($_POST['login'] === 'admin' && $_POST['pass'] === 'pwd') 
+	{
+		$_SESSION['auth']='1';
+		header('Location: index.php');
+		exit;
+	}
 }
 	?>
 	<div class="formcontainer">
@@ -32,14 +33,8 @@ if ($_POST['login']==='admin' && $_POST['pass']==='pwd') {
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 	<a class="form-signin right" href="index.php?logout">Go back</a>
 	</form>
-	</div>
-	<?php
-	die;
-}
-?>
-
+	</div>	
 <!-- connect script files -->
 <?php include "blocks/script.php" ?>
-
 </body>
 </html>
