@@ -11,7 +11,7 @@ if (!isset($_SESSION['auth'])) {
         <?php include "blocks/head.php" ?>
     <body>
         <?php include "blocks/header.php";?>
-        
+
         <?php include "blocks/sectiontop.php";?>
         <?php include "blocks/db.php";?>
         <!-- connect script files -->
