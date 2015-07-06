@@ -19,11 +19,28 @@ if (!isset($_SESSION['auth'])) {
                 printf ("Unable to connect: %s\n", mysqli_connect_error());
                 exit();
             }
+            if (isset($_POST['submit'])) 
+                {
+                    $phone_nomber = $_POST['phone_nomber'];
+                    if ($_POST['phone_nomber'] = $row['phone_nomber']) {exit;}
+                    else
+                    {                            
+                        $query = "UPDATE clientsinfo SET phone_nomber = '$phone_nomber' WHERE id = '$id' ";                        
+                        if ($mysqli->query($query) === TRUE) 
+                        {
+                            echo "<p class='center-strong'>Record updated successfully</p>";
+                        } 
+                        else
+                        {
+                            echo "<p class='center-strong'>Error updating record: </p>" . $mysqli->error;
+                        }
+                    }
+                }
             $id = key($_GET);
             $query = "SELECT id,first_name,last_name,age,address,email,job,login,password,phone_nomber,reg_date FROM clientsinfo WHERE id = '$id'";
             $result = $mysqli->query($query);
-            while ($row = $result->fetch_array(MYSQLI_ASSOC))
-            {
+            $row = $result->fetch_array(MYSQLI_ASSOC);
+            if ($row) {            
                 echo "
                     <div class='formcontainer-user-data'>
                         <form class='form-user-data' role='form' method='POST'>
@@ -49,23 +66,11 @@ if (!isset($_SESSION['auth'])) {
                             <button class='btn btn-lg btn-primary btn-block' type='submit'>Save changes</button>                            
                         </form>
                     </div>";
-                    if (isset($_POST['submit'])) 
-                    {
-                        $phone_nomber = $_POST['phone_nomber'];
-                        if ($_POST['phone_nomber'] = $row['phone_nomber']) {exit;}
-                        else
-                        {                            
-                            $query = "UPDATE clientsinfo SET phone_nomber = '$phone_nomber' WHERE id = $id";                        
-                                if ($mysqli->query($query) === TRUE) 
-                                {
-                                    echo "<p class='center-strong'>Record updated successfully</p>";
-                                } 
-                                else
-                                {
-                                    echo "<p class='center-strong'>Error updating record: </p>" . $mysqli->error;
-                                }
-                        }
-                    }
+
+            }
+            else
+            {
+                echo "<p class='center-strong'>User in not exist</p>";
             }
             echo "</table>";
             echo "<p class='center-strong'>" . $id . "</p><p class='center-strong'>user id from GET</p>";
