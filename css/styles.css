@@ -1,0 +1,36 @@
+.center
+{
+	text-align: center;
+}
+.center-strong
+{
+	font-weight: bold;
+	text-align: center;	
+}
+.container-clients
+{
+	float: right;
+	margin-right: 40px;
+	overflow: scroll;
+	max-width: 70%;
+}
+.formcontainer-user-data {
+  width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.form-user-data {
+  max-width: 430px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.table-clients
+{
+	width: 1400px;
+}
+.text-user-data
+{
+	margin: 8px 0px 0px;
+}

@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.css">
     <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/signin.css">
     <link rel="stylesheet" href="/css/styles.css">
     <title>Dashboard Template for Bootstrap</title>
 </head>
