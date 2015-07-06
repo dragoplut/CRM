@@ -12,14 +12,15 @@ if (!isset($_SESSION['auth'])) {
         <!-- all css connection are in "blocks/head.php" -->
         <?php include "blocks/head.php" ?>
     <body>
-
+        <?php include "blocks/header.php";?>
+        <?php include "blocks/leftmenu.php";?>
         <?php            
             $mysqli = new mysqli('localhost','root','1076891','clients') or die ('Unable to connect with MySQl.');
             if (mysqli_connect_errno()) {
                 printf ("Unable to connect: %s\n", mysqli_connect_error());
                 exit();
             }
-            if (isset($_POST['submit'])) 
+            if (isset($_POST['id'])) 
                 {
                     $phone_nomber = $_POST['phone_nomber'];
                     try {
@@ -32,10 +33,10 @@ if (!isset($_SESSION['auth'])) {
                         job = ?,
                         login = ?,
                         password = ?,
-                        phone_nomber = ?,
+                        phone_nomber = ?
                         WHERE id = ?");
                         $query->bind_param(
-                        'ssissssssi',
+                        "ssissssssi",
                         $_POST['first_name'],
                         $_POST['last_name'],
                         $_POST['age'],
