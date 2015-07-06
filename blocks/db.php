@@ -23,7 +23,7 @@
 	while ($row = $result->fetch_array(MYSQLI_ASSOC))
 	{
 		echo "<tr>
-		<td class='center'><a href='client.php?" .$row['id'] . "'>Edit</a></td>
+		<td class='center'><a href='client.php?id=" .$row['id'] . "'>Edit</a></td>
 		<td class='center'>" . $row['id'] . "</td>
 		<td>" . $row['first_name'] . "</td>
 		<td>" . $row['last_name'] . "</td>

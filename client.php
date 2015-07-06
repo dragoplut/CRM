@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 session_start();
 if (!isset($_SESSION['auth'])) {
     header('Location: signin.php');
@@ -10,10 +12,8 @@ if (!isset($_SESSION['auth'])) {
         <!-- all css connection are in "blocks/head.php" -->
         <?php include "blocks/head.php" ?>
     <body>
-        <?php include "blocks/header.php";?>
-        <?php include "blocks/leftmenu.php";?>     
-        <?php
-            
+
+        <?php            
             $mysqli = new mysqli('localhost','root','1076891','clients') or die ('Unable to connect with MySQl.');
             if (mysqli_connect_errno()) {
                 printf ("Unable to connect: %s\n", mysqli_connect_error());
@@ -22,21 +22,38 @@ if (!isset($_SESSION['auth'])) {
             if (isset($_POST['submit'])) 
                 {
                     $phone_nomber = $_POST['phone_nomber'];
-                    if ($_POST['phone_nomber'] = $row['phone_nomber']) {exit;}
-                    else
-                    {                            
-                        $query = "UPDATE clientsinfo SET phone_nomber = '$phone_nomber' WHERE id = '$id' ";                        
-                        if ($mysqli->query($query) === TRUE) 
-                        {
-                            echo "<p class='center-strong'>Record updated successfully</p>";
-                        } 
-                        else
-                        {
-                            echo "<p class='center-strong'>Error updating record: </p>" . $mysqli->error;
-                        }
+                    try {
+                        $query = $mysqli->prepare("UPDATE clientsinfo SET 
+                        first_name = ?,
+                        last_name = ?,
+                        age = ?,
+                        address = ?,
+                        email = ?,
+                        job = ?,
+                        login = ?,
+                        password = ?,
+                        phone_nomber = ?,
+                        WHERE id = ?");
+                        $query->bind_param(
+                        'ssissssssi',
+                        $_POST['first_name'],
+                        $_POST['last_name'],
+                        $_POST['age'],
+                        $_POST['address'],
+                        $_POST['email'],
+                        $_POST['job'],
+                        $_POST['login'],
+                        $_POST['password'],
+                        $_POST['phone_nomber'],
+                        $_POST['id']);
+                        $query->execute();
+                    } catch (Exception $e) 
+                    {
+                        echo $e->errorMessage(); 
                     }
+                        $query->close();
                 }
-            $id = key($_GET);
+            $id = $_GET['id'];
             $query = "SELECT id,first_name,last_name,age,address,email,job,login,password,phone_nomber,reg_date FROM clientsinfo WHERE id = '$id'";
             $result = $mysqli->query($query);
             $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -63,6 +80,7 @@ if (!isset($_SESSION['auth'])) {
                             <input type='text' class='form-control' name='login' value=" . $row['login'] . ">
                             <p class='text-user-data'>Password</p>
                             <input type='password' class='form-control' name='password' value=" . $row['password'] . ">
+                            <input type='hidden' class='form-control' name='id' value=" . $row['id'] . ">
                             <button class='btn btn-lg btn-primary btn-block' type='submit'>Save changes</button>                            
                         </form>
                     </div>";
