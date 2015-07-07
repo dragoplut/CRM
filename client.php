@@ -2,7 +2,8 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 session_start();
-if (!isset($_SESSION['auth'])) {
+if (!isset($_SESSION['auth'])) 
+{
     header('Location: signin.php');
 }
 ?>
@@ -21,9 +22,7 @@ if (!isset($_SESSION['auth'])) {
                 exit();
             }
             if (isset($_POST['id'])) 
-                {
-                    $phone_nomber = $_POST['phone_nomber'];
-                    try {
+                {                    
                         $query = $mysqli->prepare("UPDATE clientsinfo SET 
                         first_name = ?,
                         last_name = ?,
@@ -48,10 +47,6 @@ if (!isset($_SESSION['auth'])) {
                         $_POST['phone_nomber'],
                         $_POST['id']);
                         $query->execute();
-                    } catch (Exception $e) 
-                    {
-                        echo $e->errorMessage(); 
-                    }
                         $query->close();
                 }
             $id = $_GET['id'];
@@ -69,30 +64,30 @@ if (!isset($_SESSION['auth'])) {
                             <input type='text' class='form-control' name='last_name' value=" . $row['last_name'] . ">
                             <p class='text-user-data'>Age</p>
                             <input type='text' class='form-control' name='age' value=" . $row['age'] . ">
-                            <p class='text-user-data'>E-mail</p>
-                            <input type='text' class='form-control' name='email' value=" . $row['email'] . ">
+                            <p class='text-user-data'>E-mail *</p>
+                            <input type='text' class='form-control' required='' name='email' value=" . $row['email'] . ">
                             <p class='text-user-data'>Phone nomber</p>
                             <input type='text' class='form-control' name='phone_nomber' value=" . $row['phone_nomber'] . ">
                             <p class='text-user-data'>Address</p>
                             <input type='text' class='form-control' name='address' value=" . $row['address'] . ">
                             <p class='text-user-data'>Job</p>
                             <input type='text' class='form-control' name='job' value=" . $row['job'] . ">
-                            <p class='text-user-data'>Login</p>
-                            <input type='text' class='form-control' name='login' value=" . $row['login'] . ">
+                            <p class='text-user-data'>Login *</p>
+                            <input type='text' class='form-control' required='' name='login' value=" . $row['login'] . ">
                             <p class='text-user-data'>Password</p>
                             <input type='password' class='form-control' name='password' value=" . $row['password'] . ">
                             <input type='hidden' class='form-control' name='id' value=" . $row['id'] . ">
+                            <p class='text-user-data'>(* - required fields for input!)</p>
                             <button class='btn btn-lg btn-primary btn-block' type='submit'>Save changes</button>                            
                         </form>
                     </div>";
-
             }
             else
             {
-                echo "<p class='center-strong'>User in not exist</p>";
+                echo "<p class='center-strong'>User doesn't exist</p>";
             }
             echo "</table>";
-            echo "<p class='center-strong'>" . $id . "</p><p class='center-strong'>user id from GET</p>";
+
             $result->free();
             $mysqli->close();
         ?>

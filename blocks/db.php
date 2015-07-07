@@ -4,6 +4,7 @@
 		printf ("Unable to connect: %s\n", mysqli_connect_error());
 		exit();
 	}
+	echo ("<p class='center-strong'>Clients table</p>");
 	echo ("<div class='container-clients'><table class='container-fluid table-bordered table-clients'>");
 	echo ("<tr class='center-strong'>
 		<td>Action</td>
@@ -23,7 +24,7 @@
 	while ($row = $result->fetch_array(MYSQLI_ASSOC))
 	{
 		echo "<tr>
-		<td class='center'><a href='client.php?id=" .$row['id'] . "'>Edit</a></td>
+		<td class='center'><a href='client.php?id=" .$row['id'] . "'>Edit /</a><a href='/blocks/deleteclient.php?id=" .$row['id'] . "'> Delete</a></td>
 		<td class='center'>" . $row['id'] . "</td>
 		<td>" . $row['first_name'] . "</td>
 		<td>" . $row['last_name'] . "</td>
@@ -37,7 +38,8 @@
 		</tr></div>";
 	}
 	echo ("</table>");
-	
+	echo ("<a href='blocks/newclient.php'>Create new client</a>");
+
 	$result->free();
 	$mysqli->close();
 ?>
