@@ -17,43 +17,45 @@ if (!isset($_SESSION['auth']))
         <?php include "blocks/leftmenu.php";?>
         <?php            
             $mysqli = new mysqli('localhost','root','1076891','clients') or die ('Unable to connect with MySQl.');
-            if (mysqli_connect_errno()) {
+            if (mysqli_connect_errno()) 
+            {
                 printf ("Unable to connect: %s\n", mysqli_connect_error());
                 exit();
             }
             if (isset($_POST['id'])) 
-                {                    
-                        $query = $mysqli->prepare("UPDATE clientsinfo SET 
-                        first_name = ?,
-                        last_name = ?,
-                        age = ?,
-                        address = ?,
-                        email = ?,
-                        job = ?,
-                        login = ?,
-                        password = ?,
-                        phone_nomber = ?
-                        WHERE id = ?");
-                        $query->bind_param(
-                        "ssissssssi",
-                        $_POST['first_name'],
-                        $_POST['last_name'],
-                        $_POST['age'],
-                        $_POST['address'],
-                        $_POST['email'],
-                        $_POST['job'],
-                        $_POST['login'],
-                        $_POST['password'],
-                        $_POST['phone_nomber'],
-                        $_POST['id']);
-                        $query->execute();
-                        $query->close();
-                }
+            {                    
+            $query = $mysqli->prepare("UPDATE clientsinfo SET 
+            first_name = ?,
+            last_name = ?,
+            age = ?,
+            address = ?,
+            email = ?,
+            job = ?,
+            login = ?,
+            password = ?,
+            phone_nomber = ?
+            WHERE id = ?");
+            $query->bind_param(
+            "ssissssssi",
+            $_POST['first_name'],
+            $_POST['last_name'],
+            $_POST['age'],
+            $_POST['address'],
+            $_POST['email'],
+            $_POST['job'],
+            $_POST['login'],
+            $_POST['password'],
+            $_POST['phone_nomber'],
+            $_POST['id']);
+            $query->execute();
+            $query->close();
+            }
             $id = $_GET['id'];
             $query = "SELECT id,first_name,last_name,age,address,email,job,login,password,phone_nomber,reg_date FROM clientsinfo WHERE id = '$id'";
             $result = $mysqli->query($query);
             $row = $result->fetch_array(MYSQLI_ASSOC);
-            if ($row) {            
+            if ($row) 
+            {            
                 echo "
                     <div class='formcontainer-user-data'>
                         <form class='form-user-data' role='form' method='POST'>
