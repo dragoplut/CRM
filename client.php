@@ -59,7 +59,7 @@ if (!isset($_SESSION['auth']))
                 echo "
                     <div class='formcontainer-user-data'>
                         <form class='form-user-data' role='form' method='POST'>
-                            <h2 class='form-signin-heading center-strong'>User data</h2>
+                            <h2 class='form-signin-heading center-strong'>Client information</h2>
                             <p class='text-user-data'>First name</p>
                             <input type='text' class='form-control' name='first_name' value=" . $row['first_name'] . ">
                             <p class='text-user-data'>Last name</p>

@@ -23,16 +23,28 @@ else
 	header('Location: index.php');
 }
 
+	$mysqli = new mysqli('localhost','root','1076891','clients') or die ('Unable to connect with MySQl.');
+	if (mysqli_connect_errno()) 
+	{
+	printf ("Unable to connect: %s\n", mysqli_connect_error());
+	exit();
+	}	
+	$query = ("SELECT login,password FROM clientsinfo");
+	$result = $mysqli->query($query);
+	$row = $result->fetch_array(MYSQLI_ASSOC);
+	
 if (isset($_POST['login']) && isset($_POST['pass']))
 {
-	if ($_POST['login'] === 'admin' && $_POST['pass'] === 'pwd') 
+	if ($_POST['login'] == $row['login'] && $_POST['pass'] == $row['password']) 
 	{
 		$_SESSION['auth']='1';
 		header('Location: index.php');
 		exit;
 	}
 }
-	?>
+$result->close();
+$mysqli->close();
+?>
 	<div class="formcontainer">
 		<form class="form-signin" role="form" method="POST">
 			<h2 class="form-signin-heading center-strong">Sign in form</h2>
@@ -41,7 +53,7 @@ if (isset($_POST['login']) && isset($_POST['pass']))
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 			<!-- <a class="form-signin right" href="index.php?logout">Go back</a> -->
 		</form>
-	</div>	
+	</div>
 <!-- connect script files -->
 <?php include "blocks/script.php" ?>
 </body>
