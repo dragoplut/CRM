@@ -9,4 +9,4 @@
     $mysqli->query("DELETE FROM clientsinfo WHERE id = '$id'");
     $mysqli->close();
     header('Location: /clients.php');
-?> 
+?>

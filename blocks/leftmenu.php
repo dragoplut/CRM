@@ -1,4 +1,3 @@
-<!-- left menu -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
@@ -7,10 +6,6 @@
         <li><a href="clients.php">Clients</a></li>
         <li><a href="signin.php">Sign in</a></li>       
       </ul>
-      <!-- keep ul for possible use -->
-      <ul class="nav nav-sidebar">
-        <li><a href=""></a></li>            
-      </ul>          
     </div>
   </div>
 </div>
