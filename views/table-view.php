@@ -14,7 +14,7 @@
 			<td>Login</td>
 			<td>Password</td>
 		</tr>
-		
+
 		<tr>
 			<td class='center'><a href='client.php?id=" .$row['id'] . "'>Edit /</a><a href='/blocks/deleteclient.php?id=" .$row['id'] . "'> Delete</a></td>
 			<td class='center'>" . $row['id'] . "</td>
@@ -27,8 +27,8 @@
 			<td>" . $row['job'] . "</td>
 			<td>" . $row['login'] . "</td>
 			<td>" . $row['password'] . "</td>		
-		</tr>
-		<a href='blocks/newclient.php'>Create new client</a>
+		</tr>		
 	</table>
+	<a href='blocks/newclient.php'>Create new client</a>
 </div>
 

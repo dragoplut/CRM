@@ -1,5 +1,5 @@
 <?php include "header.php" ?>
-<?php include "controllers/mainauth.php" ?>
+<?php include "models/signin_auth.php" ?>
     <div class="formcontainer">
         <form class="form-signin" role="form" method="POST">
             <h2 class="form-signin-heading center-strong">Sign in form</h2>
