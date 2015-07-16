@@ -5,7 +5,7 @@ class Signin extends Controller
 	var $isNeedAuth = false;
 	function index()
 	{
-	echo $this->render('views/signin.php', ['pageTitle' => 'Sign in page']);
+		echo $this->render('views/signin.php', ['pageTitle' => 'Sign in page']);
 	}
 }
 ?>

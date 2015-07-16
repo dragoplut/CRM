@@ -12,10 +12,21 @@ class Controller
 	}
 	function checkAuth()
 	{
-		if (!isset($_SESSION['auth'])) 
+		require "models/authmodel.php";
+		$auth = new AuthModel();
+		$result = $auth->checkauth($_POST['login'],$_POST['password']);
+		if ($result)
 		{
-		    header('Location: /signin/index');
+			header('Location: /dashboard/index.php');
 		}
+		else
+		{
+			echo $this->render('views/signin.php', ['pageTitle' => 'Sign in page']);
+		}		
+//		if (!isset($_SESSION['auth'])) 
+//		{
+//		    header('Location: /signin/index');
+//		}
 	}
 	function render($view, $vars) 
 	{ 
@@ -24,5 +35,6 @@ class Controller
 	include($view);
 	return ob_get_clean(); 
 	}
+	
 }
 ?>
