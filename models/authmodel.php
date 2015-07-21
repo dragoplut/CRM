@@ -12,20 +12,23 @@ class AuthModel
 		$query = ("SELECT login,password FROM clientsinfo");
 		$result = $mysqli->query($query);
 		$row = $result->fetch_array(MYSQLI_ASSOC);
-		if (isset($_POST['login']) && isset($_POST['password']))
-		{
-			if ($_POST['login'] == $row['login'] && $_POST['password'] == $row['password']) 
+		
+			if ($_POST['login'] == $row['login'] && $_POST['password'] == $row['password'])
 			{
-				$_SESSION['auth']='1';
-				$checkauth = true;				
+				$_SESSION['auth'] = true;
+				$session = true;
 			}
-			else
-			{
-				$checkauth = false;
-			}
-		}
+
 		$result->close();
 		$mysqli->close();
+		return $session;
 	}
+	function render($view, $vars) 
+	{ 
+	extract($vars);
+	ob_start(); 
+	include($view);
+	return ob_get_clean(); 
+	}	
 }
 ?>

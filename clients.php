@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['auth'])) 
 {
-    header('Location: signin.php');
+    //header('Location: signin.php');
 }
 ?>
 <!DOCTYPE html>

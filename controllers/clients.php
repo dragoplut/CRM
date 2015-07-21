@@ -2,7 +2,7 @@
 require "controller.php";
 class Clients extends Controller
 {
-	var $isNeedAuth = false;
+	//var $isNeedAuth = false;
 	function index()
 	{
 		//require "models/clients_table.php";

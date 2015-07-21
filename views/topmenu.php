@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" method="POST">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -15,8 +15,8 @@
         <li><a href="">Settings</a></li>
         <li><a href="">Profile</a></li>
         <li><a href="">Help</a></li>
-        <li><a href="blocks/logout.php" type="submit" name="submit">Log out 
-          <img src="img/logoutdoorsm.png">
+        <li><a href="/logout/index" type="submit" name="logout">Log out 
+          <img src="/img/logoutdoorsm.png">
           </a>
         </li>
       </ul>
