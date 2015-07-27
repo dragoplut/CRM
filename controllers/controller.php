@@ -11,5 +11,16 @@ class Controller
         include($view);
         return ob_get_clean();
     }
+    function __construct()
+    {
+        if ($_SERVER['REQUEST_URI'] != "/login/index" )
+        {
+            session_start();
+            if (!isset($_SESSION['auth']))
+            {
+                header('Location: /login/index');
+            }
+        }
+    }
 }
 ?>
