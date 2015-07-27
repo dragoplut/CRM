@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 //set module and action
-$module = 'index';
+$module = 'board';
 $action = 'index';
 //parameters array from URI request
 $params = array();
@@ -37,6 +37,15 @@ echo "\$module: $module\n";
 echo "\$action: $action\n";
 echo "\$params:\n";
 print_r($params);
-require "controllers/" . $module . ".php";
-$controller = new $module;
-$controller->index();
+$filepath = "controllers/" . $module . ".php";
+if (file_exists($filepath))
+{
+    require "controllers/" . $module . ".php";
+    $controller = new $module;
+    $controller->$action();
+}
+else
+{
+    header('Location: /board/index');
+}
+?>

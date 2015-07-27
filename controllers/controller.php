@@ -1,7 +1,4 @@
 <?php
-/**
- * ...
- */
 class Controller
 {
     function render($view, $vars)
