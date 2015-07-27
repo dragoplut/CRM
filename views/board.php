@@ -1,6 +1,6 @@
 <?php include "header.php"?>
-    <div>
-        <p align="center">"Let your life to bloom!"</p>
+    <div align="center">
+        <p>"Let your life to bloom!"</p>
         <a href="/logout/index" type="submit" name="logout">Log out</a>
     </div>
     <div align="center">
