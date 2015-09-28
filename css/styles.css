@@ -1,36 +1,34 @@
-.center
+.demoimg
 {
-	text-align: center;
+    height: 35%;
+    width: 35%;
+    min-width: 100px;
 }
-.center-strong
+.itemList
 {
-	font-weight: bold;
-	text-align: center;	
+    margin-left: 180px;
 }
-.container-clients
+.productbox
 {
-	float: right;
-	margin-right: 40px;
-	overflow: scroll;
-	max-width: 70%;
+    position: relative;
+    padding: 10px;
+    float: left;
+    margin-top: 2%;
+    margin-left: 1%;
+    width: 80%;
+
 }
-.formcontainer-user-data {
-  width: 400px;
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.form-user-data {
-  max-width: 430px;
-  padding: 15px;
-  margin: 0 auto;
-}
-.table-clients
+.sidebar
 {
-	width: 1400px;
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    left: 0;
+    z-index: 900;
+    display: block;
+    padding: 10px;
 }
-.text-user-data
+.sortLink
 {
-	margin: 8px 0px 0px;
+    position: relative;
 }

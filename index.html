@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phones</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</head>
+<body onload="noSort(products)">
+    <div align="center"><h3>Smartphone list!</h3></div>
+        <form>
+            <div class="sidebar">
+                <ul title="Категорія">
+                    <li><a href="#" onclick="clickFilter('PC')" class="sortLink">PC</a></li>
+                    <li><a href="#" onclick="clickFilter('Phone')" class="sortLink">Phone</a></li>
+                    <li><a href="#" onclick="clickFilter('Tablet')" class="sortLink">Tablet</a></li>
+                </ul>
+                <ul title="сортувати">
+                    <li><a href="#" onclick="clickSort('asc')" class="sortLink">сортувати по зростаню</a></li>
+                    <li><a href="#" onclick="clickSort('desc')" class="sortLink">сортувати по спаданню</a></li>
+                    <li><a href="#" onclick="noSort(original)" class="sortLink">без сортування</a></li>
+                </ul>
+            </div>
+            <div class="itemList">
+                <div id="products" align="center" class="productbox">
+                </div>
+            </div>
+        </form>
+</body>
+</html>
