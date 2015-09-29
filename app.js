@@ -6,7 +6,7 @@ var products = [
         "id":0,
         "category":"Tablet",
         "imageUrl":"img/phones/motorola.png",
-        "name":"Motorola XOOM™ with Wi-Fi",
+        "Name":"Motorola XOOM™ with Wi-Fi",
         "description":"The Next, Next Generation\r\n\r\nExperience the future with Motorola.",
         "price":1990
     },
@@ -14,7 +14,7 @@ var products = [
         "id":1,
         "category":"Phone",
         "imageUrl":"img/phones/motorola-xoom.png",
-        "name":"MOTOROLA XOOM™",
+        "Name":"MOTOROLA XOOM™",
         "description":"The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM.",
         "price":1900
     },
@@ -22,7 +22,7 @@ var products = [
         "id":2,
         "category":"Phone",
         "imageUrl":"img/phones/motorola-atrix.png",
-        "name":"MOTOROLA ATRIX™ 4G",
+        "Name":"MOTOROLA ATRIX™ 4G",
         "description":"MOTOROLA ATRIX 4G the world's most powerful smartphone.",
         "price":1730
     },
@@ -30,7 +30,7 @@ var products = [
         "id":3,
         "category":"PC",
         "imageUrl":"img/phones/dell-streak.png",
-        "name":"Dell Streak 7",
+        "Name":"Dell Streak 7",
         "description":"Introducing Dell Streak 7.",
         "price":2900
     },
@@ -38,7 +38,7 @@ var products = [
         "id":4,
         "category":"Phone",
         "imageUrl":"img/phones/samsung-gem.png",
-        "name":"Samsung Gem™",
+        "Name":"Samsung Gem™",
         "description":"The Samsung Gem brings you everything.",
         "price":1230
     },
@@ -46,15 +46,15 @@ var products = [
         "id":5,
         "category":"Tablet",
         "imageUrl":"img/phones/dell-venue.png",
-        "name":"Dell Venue",
+        "Name":"Dell Venue",
         "description":"The Dell Venue; Your Personal Express Lane.",
         "price":3240
     }
 ];
 
-var blocks = '';
 var categ = '';
 var direction = '';
+var searchInput = '';
 
 function bubbleSort(products, direction)
 {
@@ -83,53 +83,45 @@ function bubbleSort(products, direction)
 
 function categoryFilter (products, categ)
 {
-    for (var i = products.length-1; i > 0; i--) {
-        for (var j = 0; j < i; j++) {
-            var tmp;
-            if (products[i].category === categ){
-                tmp += products[i];
-            };
-            products = tmp;
-        }
+    var tmp = [];
+    for (var i = 0; i < products.length; i++) {
+        if (products[i].category === categ){
+            tmp.push(products[i]);
+        };
     }
-    return products;
+    return tmp;
 };
-
-function noSort (products)
-{
-    var nosort = renderHTML(products);
-    blocks = nosort;
-    $(function () {
-        $("#products").html(blocks);
-    });
-    blocks = '';
-};
-
 
 function clickFilter (categ)
 {
     var filteredProducts = categoryFilter(products, categ);
-    blocks = renderHTML(filteredProducts);
+    var blocks = renderHTML(filteredProducts); console.info(typeof blocks);
     $(function () {
         $("#products").html(blocks);
     });
-    blocks = '';
-
 };
 
 function clickSort(direction)
 {
     var sortedProducts = bubbleSort(products, direction);
-    blocks = renderHTML(sortedProducts);
+    var blocks = renderHTML(sortedProducts);
     $(function () {
         $("#products").html(blocks);
     });
-    blocks = '';
 }
 
+function noSort(products)
+{
+    var nosort = renderHTML(products);
+    var blocks = nosort;
+    $(function () {
+        $("#products").html(blocks);
+    });
+};
 
 function renderHTML(products)
 {
+    var blocks = [];
     for (var i = 0; i < products.length; i++) {
         var template = '<div align="center" class="productbox"><img src="' + products[i].imageUrl + '" align="left" alt="' + products[i].name + '" class="demoimg"><h4>' + products[i].name + '</h4><h5>' + products[i].description + '</h5><h5>Price: ' + products[i].price + '</h5></div>';
         blocks += template;
@@ -137,51 +129,27 @@ function renderHTML(products)
     return blocks;
 };
 
-
-
-
-
-
-
-
-
-
-function ClickSortOLD(products, sortDirection)
+function searchFilter(products, searchInput)
 {
-    if (sortDirection === 'Asc')
+    searchInput = document.getElementById('hook').value;
+    console.log(searchInput);
+    var tmp = [];
+    for (var i = 0; i < products.length; i++)
     {
-        productsAsc = BubbleAscSort(products);
-        var blocks = '';
-        for (var i = 0; i < products.length; i++) {
-            var template = '<div align="center" class="productbox"><img src="' + productsAsc[i].imageUrl + '" align="left" alt="' + productsAsc[i].name + '" class="demoimg"><h4>' + productsAsc[i].name + '</h4><h5>' + productsAsc[i].description + '</h5><h5>Price: ' + productsAsc[i].price + '</h5></div>';
-            blocks += template;
-        }
-        $(function () {
-            $("#products").html(blocks);
-        });
-    }
-    else if (sortDirection === 'Desc')
-    {
-        productsDesc = BubbleDescSort(products);
-        var blocks = '';
-        for (var i = 0; i < products.length; i++) {
-            var template = '<div align="center" class="productbox"><img src="' + productsDesc[i].imageUrl + '" align="left" alt="' + productsDesc[i].name + '" class="demoimg"><h4>' + productsDesc[i].name + '</h4><h5>' + productsDesc[i].description + '</h5><h5>Price: ' + productsDesc[i].price + '</h5></div>';
-            blocks += template;
-        }
-        $(function () {
-            $("#products").html(blocks);
-        });
-    }
-    else
-    {
-        var blocks = '';
-        for (var i = 0; i < products.length; i++) {
-            var template = '<div align="center" class="productbox"><img src="' + products[i].imageUrl + '" align="left" alt="' + products[i].name + '" class="demoimg"><h4>' + products[i].name + '</h4><h5>' + products[i].description + '</h5><h5>Price: ' + products[i].price + '</h5></div>';
-            blocks += template;
-        }
-        $(function () {
-            $("#products").html(blocks);
-        });
-    }
-}
+        if (products[i].Name === searchInput)
+        {
+            tmp.push(products[i]);
+        };
+    };
+    console.log(tmp);
+    var blocks = renderHTML(tmp);
+    $(function () {
+        $("#products").html(blocks);
+    });
+    console.log(blocks);
+};
+
+
+
+
 
