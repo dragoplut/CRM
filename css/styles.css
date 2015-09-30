@@ -6,26 +6,43 @@
 }
 .itemList
 {
-    margin-left: 180px;
+    margin-left: 230px;
+}
+.liUnmark
+{
+    list-style-type: none;
 }
 .productbox
 {
+    float: left;
+    margin-top: 0%;
+    margin-left: 0%;
     position: relative;
     padding: 10px;
-    float: left;
-    margin-top: 2%;
-    margin-left: 2%;
-    width: 80%;
+    padding-right: 0px;
+    width: 90%;
 }
 .sidebar
 {
-    position: fixed;
-    top: 80px;
-    bottom: 0;
-    left: 0;
-    z-index: 900;
+    border-color: #f7e1b5;
+    border-style: groove;
+    bottom: 10px;
     display: block;
+    left: 0;
+    margin-left: 1%;
+    min-height: 250px;
     padding: 10px;
+    position: fixed;
+    top: 70px;
+    z-index: 900;
+
+}
+.sidebarList
+{
+    margin-left: 10px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-left: 0px;
 }
 .sortLink
 {

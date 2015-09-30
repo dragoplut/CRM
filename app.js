@@ -123,7 +123,7 @@ function renderHTML(products)
 {
     var blocks = [];
     for (var i = 0; i < products.length; i++) {
-        var template = '<div align="center" class="productbox"><img src="' + products[i].imageUrl + '" align="left" alt="' + products[i].name + '" class="demoimg"><h4>' + products[i].name + '</h4><h5>' + products[i].description + '</h5><h5>Price: ' + products[i].price + '</h5></div>';
+        var template = '<div align="center" class="productbox"><img src="' + products[i].imageUrl + '" align="left" alt="' + products[i].Name + '" class="demoimg"><h4>' + products[i].Name + '</h4><h5>' + products[i].description + '</h5><h5>Price: ' + products[i].price + '</h5></div>';
         blocks += template;
     }
     return blocks;
@@ -132,7 +132,25 @@ function renderHTML(products)
 function searchFilter(products, searchInput)
 {
     searchInput = document.getElementById('hook').value;
-    console.log(searchInput);
+    var tmp = [];
+    for (var i = 0; i < products.length; i++)
+    {
+        var matcher = new RegExp(searchInput);
+        if (matcher.test(products[i].Name))
+        {
+            tmp.push(products[i]);
+        };
+    };
+    var blocks = renderHTML(tmp);
+    $(function () {
+        $("#products").html(blocks);
+    });
+};
+
+
+function searchFilter2(products, searchInput)
+{
+    searchInput = document.getElementById('hook').value;
     var tmp = [];
     for (var i = 0; i < products.length; i++)
     {
@@ -141,15 +159,27 @@ function searchFilter(products, searchInput)
             tmp.push(products[i]);
         };
     };
-    console.log(tmp);
     var blocks = renderHTML(tmp);
     $(function () {
         $("#products").html(blocks);
     });
-    console.log(blocks);
 };
 
 
+function testExp(products)
+{
+    for (var i = 0; i < products.length; i++)
+    {
+        if ( /^phone/.test(products[i].Name))
+        {
+            console.log("problem in: ", i);
+        }
+        else
+        {
+            console.log("ok ", i)
+        };
+    };
+};
 
 
 

@@ -13,16 +13,16 @@
         <form>
             <div class="sidebar">
                 <input type="text" name="search" id="hook" size="15px">
-                <button type="submit" onclick="searchFilter(products, searchInput)">Пошук</button>
-                <ul title="Категорія">
-                    <li><a href="#" onclick="clickFilter('PC')" class="sortLink">PC</a></li>
-                    <li><a href="#" onclick="clickFilter('Phone')" class="sortLink">Phone</a></li>
-                    <li><a href="#" onclick="clickFilter('Tablet')" class="sortLink">Tablet</a></li>
+                <button onclick="searchFilter(products)">Пошук</button>
+                <ul title="Категорія" class="sidebarList">
+                    <li class="liUnmark"><a href="#" onclick="clickFilter('PC')" class="sortLink">PC</a></li>
+                    <li class="liUnmark"><a href="#" onclick="clickFilter('Phone')" class="sortLink">Phone</a></li>
+                    <li class="liUnmark"><a href="#" onclick="clickFilter('Tablet')" class="sortLink">Tablet</a></li>
                 </ul>
-                <ul title="сортувати">
-                    <li><a href="#" onclick="clickSort('asc')" class="sortLink">сортувати по зростаню</a></li>
-                    <li><a href="#" onclick="clickSort('desc')" class="sortLink">сортувати по спаданню</a></li>
-                    <li><a href="#" onclick="noSort(products)" class="sortLink">без сортування</a></li>
+                <ul title="сортувати" class="sidebarList">
+                    <li class="liUnmark"><a href="#" onclick="clickSort('asc')" class="sortLink">сортувати по зростаню</a></li>
+                    <li class="liUnmark"><a href="#" onclick="clickSort('desc')" class="sortLink">сортувати по спаданню</a></li>
+                    <li class="liUnmark"><a href="#" onclick="noSort(products)" class="sortLink">без сортування</a></li>
                 </ul>
             </div>
             <div class="itemList">
