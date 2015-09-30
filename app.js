@@ -148,24 +148,6 @@ function searchFilter(products, searchInput)
 };
 
 
-function searchFilter2(products, searchInput)
-{
-    searchInput = document.getElementById('hook').value;
-    var tmp = [];
-    for (var i = 0; i < products.length; i++)
-    {
-        if (products[i].Name === searchInput)
-        {
-            tmp.push(products[i]);
-        };
-    };
-    var blocks = renderHTML(tmp);
-    $(function () {
-        $("#products").html(blocks);
-    });
-};
-
-
 function testExp(products)
 {
     for (var i = 0; i < products.length; i++)
