@@ -1,67 +1,11 @@
 /**
  * Created by oleksandr on 22.09.15.
  */
-var products2 = [
-    {
-        "id":0,
-        "category":"Tablet",
-        "imageUrl":"img/phones/motorola.png",
-        "Name":"Motorola XOOM™ with Wi-Fi",
-        "description":"The Next, Next Generation\r\n\r\nExperience the future with Motorola.",
-        "price":1990
-    },
-    {
-        "id":1,
-        "category":"Phone",
-        "imageUrl":"img/phones/motorola-xoom.png",
-        "Name":"MOTOROLA XOOM™",
-        "description":"The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM.",
-        "price":1900
-    },
-    {
-        "id":2,
-        "category":"Phone",
-        "imageUrl":"img/phones/motorola-atrix.png",
-        "Name":"MOTOROLA ATRIX™ 4G",
-        "description":"MOTOROLA ATRIX 4G the world's most powerful smartphone.",
-        "price":1730
-    },
-    {
-        "id":3,
-        "category":"PC",
-        "imageUrl":"img/phones/dell-streak.png",
-        "Name":"Dell Streak 7",
-        "description":"Introducing Dell Streak 7.",
-        "price":2900
-    },
-    {
-        "id":4,
-        "category":"Phone",
-        "imageUrl":"img/phones/samsung-gem.png",
-        "Name":"Samsung Gem™",
-        "description":"The Samsung Gem brings you everything.",
-        "price":1230
-    },
-    {
-        "id":5,
-        "category":"Tablet",
-        "imageUrl":"img/phones/dell-venue.png",
-        "Name":"Dell Venue",
-        "description":"The Dell Venue; Your Personal Express Lane.",
-        "price":3240
-    }
-];
 var products = [];
-$.ajax({
-    dataType: 'json',
-    url: 'http://localhost/products.json',
-    success: function(result){
-        $(function () {
-            $("#products").html(renderHTML(result.data));
-        });
-    }
-});
 
+$(function(){
+    loadProducts(productsLoaded);
+});
 
 var categ = '';
 var direction = '';
@@ -98,10 +42,10 @@ function categoryFilter (products, categ)
     for (var i = 0; i < products.length; i++) {
         if (products[i].category === categ){
             tmp.push(products[i]);
-        };
+        }
     }
     return tmp;
-};
+}
 
 function clickFilter (categ)
 {
@@ -110,7 +54,7 @@ function clickFilter (categ)
     $(function () {
         $("#products").html(blocks);
     });
-};
+}
 
 function clickSort(direction)
 {
@@ -121,6 +65,16 @@ function clickSort(direction)
     });
 }
 
+function loadProducts(callback) {
+    $.ajax({
+        dataType: 'json',
+        url: 'http://localhost/products.json',
+        success: function (result) {
+            callback(result.data);
+        }
+    });
+}
+
 function noSort(products)
 {
     var nosort = renderHTML(products);
@@ -128,7 +82,12 @@ function noSort(products)
     $(function () {
         $("#products").html(blocks);
     });
-};
+}
+
+function productsLoaded(data){
+    products = data;
+    $("#products").html(renderHTML(products))
+}
 
 function renderHTML(products)
 {
@@ -138,7 +97,7 @@ function renderHTML(products)
         blocks += template;
     }
     return blocks;
-};
+}
 
 function searchFilter(products, searchInput)
 {
@@ -156,23 +115,5 @@ function searchFilter(products, searchInput)
     $(function () {
         $("#products").html(blocks);
     });
-};
-
-
-function testExp(products)
-{
-    for (var i = 0; i < products.length; i++)
-    {
-        if ( /^phone/.test(products[i].Name))
-        {
-            console.log("problem in: ", i);
-        }
-        else
-        {
-            console.log("ok ", i)
-        };
-    };
-};
-
-
+}
 
