@@ -11,19 +11,14 @@ var categ = '';
 var direction = '';
 var searchInput = '';
 
-function bubbleSort(products, direction)
-{
-    for (var i = products.length-1; i > 0; i--)
-    {
-        for (var j = 0; j < i; j++)
-        {
+function bubbleSort(products, direction) {
+    for (var i = products.length-1; i > 0; i--) {
+        for (var j = 0; j < i; j++) {
             var condition;
-            if (direction === 'asc')
-            {
+            if (direction === 'asc') {
                 condition = products[j].price > products[j + 1].price;
             }
-            else
-            {
+            else {
                 condition = products[j].price < products[j + 1].price;
             }
             if (condition) {
@@ -36,8 +31,7 @@ function bubbleSort(products, direction)
     return products;
 }
 
-function categoryFilter (products, categ)
-{
+function categoryFilter (products, categ) {
     var tmp = [];
     for (var i = 0; i < products.length; i++) {
         if (products[i].category === categ){
@@ -47,18 +41,16 @@ function categoryFilter (products, categ)
     return tmp;
 }
 
-function clickFilter (categ)
-{
+function clickFilter (categ) {
     var filteredProducts = categoryFilter(products, categ);
     var blocks = renderHTML(filteredProducts); console.info(typeof blocks);
         $("#products").html(blocks);
 }
 
-function clickSort(direction)
-{
+function clickSort(direction) {
     var sortedProducts = bubbleSort(products, direction);
     var blocks = renderHTML(sortedProducts);
-        $("#products").html(blocks);
+    $("#products").html(blocks);
 }
 
 function loadProducts(callback) {
@@ -71,11 +63,8 @@ function loadProducts(callback) {
     });
 }
 
-function noSort()
-{
-    var nosort = renderHTML(products);
-    var blocks = nosort;
-        $("#products").html(blocks);
+function noSort() {
+    $("#products").html(renderHTML(products));
 }
 
 function productsLoaded(data){
@@ -83,8 +72,7 @@ function productsLoaded(data){
     $("#products").html(renderHTML(products))
 }
 
-function renderHTML(products)
-{
+function renderHTML(products) {
     var blocks = [];
     for (var i = 0; i < products.length; i++) {
         var template = '<div align="center" class="productbox"><img src="' + products[i].imageUrl + '" align="left" alt="' + products[i].Name + '" class="demoimg"><h4>' + products[i].Name + '</h4><h5>' + products[i].description + '</h5><h5>Price: ' + products[i].price + '</h5></div>';
@@ -93,19 +81,15 @@ function renderHTML(products)
     return blocks;
 }
 
-function searchFilter(searchInput)
-{
+function searchFilter(searchInput) {
     searchInput = document.getElementById('hook').value;
     var tmp = [];
-    for (var i = 0; i < products.length; i++)
-    {
+    for (var i = 0; i < products.length; i++) {
         var matcher = new RegExp(searchInput);
-        if (matcher.test(products[i].Name))
-        {
+        if (matcher.test(products[i].Name)) {
             tmp.push(products[i]);
         };
     };
     var blocks = renderHTML(tmp);
-        $("#products").html(blocks);
+    $("#products").html(blocks);
 }
-
