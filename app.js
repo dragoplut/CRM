@@ -51,18 +51,14 @@ function clickFilter (categ)
 {
     var filteredProducts = categoryFilter(products, categ);
     var blocks = renderHTML(filteredProducts); console.info(typeof blocks);
-    $(function () {
         $("#products").html(blocks);
-    });
 }
 
 function clickSort(direction)
 {
     var sortedProducts = bubbleSort(products, direction);
     var blocks = renderHTML(sortedProducts);
-    $(function () {
         $("#products").html(blocks);
-    });
 }
 
 function loadProducts(callback) {
@@ -75,13 +71,11 @@ function loadProducts(callback) {
     });
 }
 
-function noSort(products)
+function noSort()
 {
     var nosort = renderHTML(products);
     var blocks = nosort;
-    $(function () {
         $("#products").html(blocks);
-    });
 }
 
 function productsLoaded(data){
@@ -99,7 +93,7 @@ function renderHTML(products)
     return blocks;
 }
 
-function searchFilter(products, searchInput)
+function searchFilter(searchInput)
 {
     searchInput = document.getElementById('hook').value;
     var tmp = [];
@@ -112,8 +106,6 @@ function searchFilter(products, searchInput)
         };
     };
     var blocks = renderHTML(tmp);
-    $(function () {
         $("#products").html(blocks);
-    });
 }
 

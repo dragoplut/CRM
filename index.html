@@ -12,8 +12,8 @@
     <div align="center"><h3>Smartphone list!</h3></div>
         <form>
             <div class="sidebar">
-                <input onkeydown="searchFilter(products)" type="text" name="search" id="hook" size="12">
-                <button onclick="searchFilter(products)">Пошук</button>
+                <input onkeydown="searchFilter()" type="text" name="search" id="hook" size="12">
+                <button onclick="searchFilter()">Пошук</button>
                 <ul title="Категорія" class="sidebarList">
                     <li class="liUnmark"><a href="#" onclick="clickFilter('PC')" class="sortLink">PC</a></li>
                     <li class="liUnmark"><a href="#" onclick="clickFilter('Phone')" class="sortLink">Phone</a></li>
@@ -22,7 +22,7 @@
                 <ul title="сортувати" class="sidebarList">
                     <li class="liUnmark"><a href="#" onclick="clickSort('asc')" class="sortLink">сортувати по зростаню</a></li>
                     <li class="liUnmark"><a href="#" onclick="clickSort('desc')" class="sortLink">сортувати по спаданню</a></li>
-                    <li class="liUnmark"><a href="#" onclick="noSort(products)" class="sortLink">без сортування</a></li>
+                    <li class="liUnmark"><a href="#" onclick="noSort()" class="sortLink">без сортування</a></li>
                 </ul>
             </div>
             <div class="itemList">
