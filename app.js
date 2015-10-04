@@ -1,7 +1,7 @@
 /**
  * Created by oleksandr on 22.09.15.
  */
-var products = [
+var products2 = [
     {
         "id":0,
         "category":"Tablet",
@@ -51,6 +51,17 @@ var products = [
         "price":3240
     }
 ];
+var products = [];
+$.ajax({
+    dataType: 'json',
+    url: 'http://localhost/products.json',
+    success: function(result){
+        $(function () {
+            $("#products").html(renderHTML(result.data));
+        });
+    }
+});
+
 
 var categ = '';
 var direction = '';

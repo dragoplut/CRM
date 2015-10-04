@@ -12,7 +12,7 @@
     <div align="center"><h3>Smartphone list!</h3></div>
         <form>
             <div class="sidebar">
-                <input type="text" name="search" id="hook" size="15px">
+                <input onkeydown="searchFilter(products)" type="text" name="search" id="hook" size="12">
                 <button onclick="searchFilter(products)">Пошук</button>
                 <ul title="Категорія" class="sidebarList">
                     <li class="liUnmark"><a href="#" onclick="clickFilter('PC')" class="sortLink">PC</a></li>
