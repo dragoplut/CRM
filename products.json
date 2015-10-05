@@ -47,6 +47,150 @@
       "Name":"Dell Venue",
       "description":"The Dell Venue; Your Personal Express Lane.",
       "price":3240
+    },
+    {
+      "id":6,
+      "category":"Phone",
+      "imageUrl":"img/phones/lg-l70-d325.png",
+      "Name":"LG L70 D325 III DUAL SIM WHITE",
+      "description":"Большой, яркий сенсорный дисплей, широкий набор полезных функций, основная и фронтальная фотокамеры и, наконец, стильный дизайн корпуса наверняка привлекут внимание даже искушенных гаджетоманов.",
+      "price":2500
+    },
+    {
+      "id":7,
+      "category":"Phone",
+      "imageUrl":"img/phones/motorola-xoom.png",
+      "Name":"MOTOROLA XOOM™",
+      "description":"The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM.",
+      "price":1900
+    },
+    {
+      "id":8,
+      "category":"Phone",
+      "imageUrl":"img/phones/motorola-atrix.png",
+      "Name":"MOTOROLA ATRIX™ 4G",
+      "description":"MOTOROLA ATRIX 4G the world's most powerful smartphone.",
+      "price":1730
+    },
+    {
+      "id":9,
+      "category":"PC",
+      "imageUrl":"img/phones/dell-streak.png",
+      "Name":"Dell Streak 7",
+      "description":"Introducing Dell Streak 7.",
+      "price":2900
+    },
+    {
+      "id":10,
+      "category":"Phone",
+      "imageUrl":"img/phones/samsung-gem.png",
+      "Name":"Samsung Gem™",
+      "description":"The Samsung Gem brings you everything.",
+      "price":1230
+    },
+    {
+      "id":11,
+      "category":"Tablet",
+      "imageUrl":"img/phones/dell-venue.png",
+      "Name":"Dell Venue",
+      "description":"The Dell Venue; Your Personal Express Lane.",
+      "price":3240
+    },
+    {
+      "id":12,
+      "category":"Tablet",
+      "imageUrl":"img/phones/motorola.png",
+      "Name":"Motorola XOOM™ with Wi-Fi",
+      "description":"The Next, Next Generation\r\n\r\nExperience the future with Motorola.",
+      "price":1990
+    },
+    {
+      "id":13,
+      "category":"Phone",
+      "imageUrl":"img/phones/motorola-xoom.png",
+      "Name":"MOTOROLA XOOM™",
+      "description":"The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM.",
+      "price":1900
+    },
+    {
+      "id":14,
+      "category":"Phone",
+      "imageUrl":"img/phones/motorola-atrix.png",
+      "Name":"MOTOROLA ATRIX™ 4G",
+      "description":"MOTOROLA ATRIX 4G the world's most powerful smartphone.",
+      "price":1730
+    },
+    {
+      "id":15,
+      "category":"PC",
+      "imageUrl":"img/phones/dell-streak.png",
+      "Name":"Dell Streak 7",
+      "description":"Introducing Dell Streak 7.",
+      "price":2900
+    },
+    {
+      "id":16,
+      "category":"Phone",
+      "imageUrl":"img/phones/samsung-gem.png",
+      "Name":"Samsung Gem™",
+      "description":"The Samsung Gem brings you everything.",
+      "price":1230
+    },
+    {
+      "id":17,
+      "category":"Tablet",
+      "imageUrl":"img/phones/dell-venue.png",
+      "Name":"Dell Venue",
+      "description":"The Dell Venue; Your Personal Express Lane.",
+      "price":3240
+    },
+    {
+      "id":18,
+      "category":"Tablet",
+      "imageUrl":"img/phones/motorola.png",
+      "Name":"Motorola XOOM™ with Wi-Fi",
+      "description":"The Next, Next Generation\r\n\r\nExperience the future with Motorola.",
+      "price":1990
+    },
+    {
+      "id":19,
+      "category":"Phone",
+      "imageUrl":"img/phones/motorola-xoom.png",
+      "Name":"MOTOROLA XOOM™",
+      "description":"The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM.",
+      "price":1900
+    },
+    {
+      "id":20,
+      "category":"Phone",
+      "imageUrl":"img/phones/motorola-atrix.png",
+      "Name":"MOTOROLA ATRIX™ 4G",
+      "description":"MOTOROLA ATRIX 4G the world's most powerful smartphone.",
+      "price":1730
+    },
+    {
+      "id":21,
+      "category":"PC",
+      "imageUrl":"img/phones/dell-streak.png",
+      "Name":"Dell Streak 7",
+      "description":"Introducing Dell Streak 7.",
+      "price":2900
+    },
+    {
+      "id":22,
+      "category":"Phone",
+      "imageUrl":"img/phones/samsung-gem.png",
+      "Name":"Samsung Gem™",
+      "description":"The Samsung Gem brings you everything.",
+      "price":1230
+    },
+    {
+      "id":23,
+      "category":"Tablet",
+      "imageUrl":"img/phones/dell-venue.png",
+      "Name":"Dell Venue",
+      "description":"The Dell Venue; Your Personal Express Lane.",
+      "price":3240
     }
   ]
 }
