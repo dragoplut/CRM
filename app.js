@@ -76,12 +76,14 @@ function removeProduct(i){
     var elem = document.getElementById(i);
     elem.remove();
     products.splice(i, 1);
+    console.log(i);
+    console.log(products[i]);
 }
 
 function renderHTML(products) {
     var blocks = [];
     for (var i = 0; i < products.length; i++) {
-        var template = '<div align="center" class="productbox" id="' + i + '" name="tempDiv"><img src="' + products[i].imageUrl + '" align="left" alt="' + products[i].Name + '" class="demoimg"><h4>' + products[i].Name + '</h4><h5>' + products[i].description + '</h5><h5>Price: ' + products[i].price + '</h5><a onclick="removeProduct(' + i + ')">Видалити</a></div>';
+        var template = '<div align="center" class="productbox" id="' + products[i].id + '" name="tempDiv"><img src="' + products[i].imageUrl + '" align="left" alt="' + products[i].Name + '" class="demoimg"><h4>' + products[i].Name + '</h4><h5>' + products[i].description + '</h5><h5>Price: ' + products[i].price + '</h5><a onclick="removeProduct(' + products[i].id + ')">Видалити</a></div>';
         blocks += template;
     }
     return blocks;
