@@ -75,9 +75,13 @@ function productsLoaded(data){
 function removeProduct(i){
     var elem = document.getElementById(i);
     elem.remove();
-    products.splice(i, 1);
+    for (var j = 0; j < products.length; j++){
+        if (products[j].id === i){
+            products.splice(j, 1);
+            console.log(products[j]);
+        }
+    }
     console.log(i);
-    console.log(products[i]);
 }
 
 function renderHTML(products) {
