@@ -9,7 +9,7 @@
     <script type="text/javascript" src="app.js"></script>
 </head>
 <body>
-    <div align="center"><h3>Smartphone list!</h3></div>
+    <div><h3 class="heading">Smartphone list!</h3></div>
             <div class="sidebar">
                 <input onkeydown="searchFilter()" type="text" name="search" id="hook" size="12">
                 <button onclick="searchFilter()">Пошук</button>
@@ -24,6 +24,26 @@
                     <li class="liUnmark"><a href="#" onclick="noSort()" class="sortLink">без сортування</a></li>
                 </ul>
             </div>
+            <div id="panel">
+                <div class="topFormLine"></div>
+                <h4 class="heading">Внесіть дані про новий продукт</h4>
+                <div>
+                    <select title="категорія продукту" class="form-control" id="productCategory">
+                        <option value="PC">PC</option>
+                        <option value="Phone">Телефон</option>
+                        <option value="Tablet">Таблет</option>
+                    </select>
+                </div>
+                <input class="form-control" placeholder="назва продукту" required="" autofocus="" id="productName">
+                <input class="form-control" placeholder="ціна" type="number"  required="" id="productPrice">
+                <input class="form-control" placeholder="шлях до зображення" required="" id="productImgUrl">
+                <input class="form-control" placeholder="опис продукту" required="" id="productDescription">
+                <div class="center">
+                    <button type="reset" title="Очистити форму">Очистити форму</button>
+                    <button type="submit" title="Внести продукт" onclick="productArray()">Внести продукт</button>
+                </div>
+            </div>
+            <p class="slide"><a href="#" class="btn-slide">Додати продукт</a></p>
             <div class="itemList">
                 <div id="products" align="center" class="productbox"></div>
             </div>

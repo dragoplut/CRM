@@ -1,29 +1,56 @@
-.demoimg
-{
+.btn-slide{
+    text-align: center;
+    width: 144px;
+    height: 30px;
+    padding: 10px 10px 0 0;
+    margin: 0 auto;
+    display: block;
+    font: 120%/100% Arial, Helvetica, sans-serif;
+    color: #080808;
+    text-decoration: none;
+}
+.center{
+    margin: 0 25% 0 25%;
+    width: 60%;
+}
+.demoimg{
     height: 35%;
     width: 35%;
     min-width: 100px;
 }
-.itemList
-{
+.itemList{
     margin-left: 230px;
 }
-.liUnmark
-{
+.form-control{
+    margin: 5px;
+    width: 98%;
+}
+.heading{
+    text-align: center;
+}
+.liUnmark{
     list-style-type: none;
 }
-.productbox
-{
+#panel{
+    background: #f7e1b5;
+    display: none;
+    margin-left: 230px;
+    margin-right: 20px;
+    min-width: 480px;
+    height: 275px;
+}
+.productbox{
     float: left;
     margin-top: 0%;
     margin-left: 0%;
+    min-width: 410px;
     position: relative;
     padding: 10px;
     padding-right: 0px;
     width: 90%;
+
 }
-.sidebar
-{
+.sidebar{
     border-color: #f7e1b5;
     border-style: groove;
     bottom: 10px;
@@ -33,18 +60,29 @@
     min-height: 250px;
     padding: 10px;
     position: fixed;
-    top: 70px;
+    top: 57px;
     z-index: 900;
 
 }
-.sidebarList
-{
+.sidebarList{
     margin-left: 10px;
     margin-top: 5px;
     padding-top: 5px;
     padding-left: 0px;
 }
-.sortLink
-{
+.slide{
+    border-top: solid 4px #c0a16b;
+    margin-left: 230px;
+    margin-right: 20px;
+    min-width: 480px;
+    padding: 0;
+}
+.sortLink{
     position: relative;
+}
+.topFormLine{
+    border-top: solid 4px #c0a16b;
+    margin: 0;
+    min-width: 480px;
+    padding: 0;
 }

@@ -7,9 +7,29 @@ $(function(){
     loadProducts(productsLoaded);
 });
 
+$(document).ready(function(){
+   $(".btn-slide").click(function(){
+       $("#panel").slideToggle("slow");
+       $(this).toggleClass("active");
+   })
+});
+
 var categ = '';
 var direction = '';
 var searchInput = '';
+var newProduct = [];
+
+function productArray (){
+    var productCategory = document.getElementById('productCategory').value;
+    var productName = document.getElementById('productName').value;
+    var productPrice = document.getElementById('productPrice').value;
+    var productImgUrl = document.getElementById('productImgUrl').value;
+    var productDescription = document.getElementById('productDescription').value;
+    var productId = products.length + 1;
+    products.push({id: productId, category: productCategory, imageUrl: productImgUrl, Name: productName, description: productDescription, price: productPrice});
+    noSort();
+    console.log(products);
+}
 
 function bubbleSort(products, direction) {
     for (var i = products.length-1; i > 0; i--) {
@@ -78,10 +98,9 @@ function removeProduct(i){
     for (var j = 0; j < products.length; j++){
         if (products[j].id === i){
             products.splice(j, 1);
-            console.log(products[j]);
+            break;
         }
     }
-    console.log(i);
 }
 
 function renderHTML(products) {
