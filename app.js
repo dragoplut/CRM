@@ -23,7 +23,7 @@ var searchInput = '';
 
 function pagination(pageNum){
     page = pageNum;
-    renderHTML();
+    noSort();
 };
 
 function productArray (){                       //Створення масиву з новим продуктом із данних внесених в форму-слайдер
