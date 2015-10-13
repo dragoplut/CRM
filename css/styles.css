@@ -31,6 +31,13 @@
 .liUnmark{
     list-style-type: none;
 }
+.pagingButtons{
+    display: inline;
+    list-style-type: none;
+    margin-left: 1px;
+    margin-right: 2px;
+    position: relative;
+}
 #panel{
     background: #f7e1b5;
     display: none;

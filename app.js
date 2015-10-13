@@ -117,9 +117,9 @@ function renderHTML(products) {                 //Попередній ренд�
         blocks += template;
     }
     numPages = Math.ceil(products.length / numElem);
-    var pageControls = '<div id="pagingControls" class="pagingButtons"><ul>';
+    var pageControls = '<div id="pagingControls"><ul>';
     for (var j = 1; j <= numPages; j++){
-        pageControls += '<li><a href="#" onclick="pagination(' + j + ')">' + j + '</a></li>';
+        pageControls += '<li  class="pagingButtons"><a href="#" onclick="pagination(' + j + ')">' + j + '</a></li>';
     }
     pageControls += '</ul></div>';
     $("#pagingControls").html(pageControls);
