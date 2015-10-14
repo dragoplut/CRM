@@ -10,16 +10,27 @@
     text-decoration: none;
 }
 .center{
-    margin: 0 25% 0 25%;
-    width: 60%;
+    margin-left: 25%;
+    width: 100%;
+}
+.characterbox{
+    float: left;
+    margin: 1%;
+    position: relative;
 }
 .demoimg{
-    height: 35%;
-    width: 35%;
-    min-width: 100px;
+    height: 25%;
+    width: 25%;
+    min-width: 80px;
 }
 .itemList{
     margin-left: 230px;
+}
+.logo{
+    margin: 2% 0% 2% 0%;
+}
+.logo-marvel{
+    width: 450px;
 }
 .form-control{
     margin: 5px;
