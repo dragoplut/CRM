@@ -19,8 +19,8 @@
     margin: 5px;
 }
 .demoimg{
-    height: 140px;
-    width: 140px;
+    height: 150px;
+    width: 150px;
 }
 .itemList{
     margin-left: 230px;
@@ -41,12 +41,16 @@
 .liUnmark{
     list-style-type: none;
 }
+.pageButton{
+
+}
 .pagingButtons{
     display: inline;
     list-style-type: none;
     margin-left: 1px;
     margin-right: 2px;
     position: relative;
+    text-align: center;
 }
 #panel{
     background: #f7e1b5;
@@ -58,14 +62,11 @@
 }
 .productbox{
     float: left;
-    margin-top: 0%;
-    margin-left: 0%;
-    min-width: 410px;
+    margin-top: 10px;
+    min-width: 200px;
     position: relative;
     padding: 10px;
-    padding-right: 0px;
-    width: 90%;
-
+    padding-bottom: 40px;
 }
 .sidebar{
     border-color: #f7e1b5;
