@@ -10,24 +10,23 @@
     text-decoration: none;
 }
 .center{
-    margin-left: 25%;
-    width: 100%;
+    text-align: center;
 }
 .characterbox{
     float: left;
-    margin: 1%;
+    padding: 5px 20px;
     position: relative;
+    margin: 5px;
 }
 .demoimg{
-    height: 25%;
-    width: 25%;
-    min-width: 80px;
+    height: 140px;
+    width: 140px;
 }
 .itemList{
     margin-left: 230px;
 }
 .logo{
-    margin: 2% 0% 2% 0%;
+    margin: 15px 0% 15px 0%;
 }
 .logo-marvel{
     width: 450px;
@@ -103,4 +102,9 @@
     margin: 0;
     min-width: 480px;
     padding: 0;
+}
+.topMenu{
+    display: table;
+    margin: 0 auto;
+    text-align: center;
 }
