@@ -1,13 +1,5 @@
-.btn-slide{
-    text-align: center;
-    width: 144px;
-    height: 30px;
-    padding: 10px 10px 0 0;
-    margin: 0 auto;
-    display: block;
-    font: 120%/100% Arial, Helvetica, sans-serif;
-    color: #080808;
-    text-decoration: none;
+body{
+    background-image: url(/img/presence-ii.png);
 }
 .center{
     text-align: center;
@@ -47,18 +39,19 @@
 .pagingButtons{
     display: inline;
     list-style-type: none;
-    margin-left: 1px;
-    margin-right: 2px;
     position: relative;
     text-align: center;
 }
 #panel{
+    border-top: solid 4px #c0a16b;
+    border-bottom: solid 4px #c0a16b;
     background: #f7e1b5;
     display: none;
-    margin-left: 230px;
-    margin-right: 20px;
-    min-width: 480px;
-    height: 275px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 15px;
+    height: 165px;
+    width: 50%;
 }
 .productbox{
     float: left;
@@ -89,10 +82,9 @@
     padding-left: 0px;
 }
 .slide{
-    border-top: solid 4px #c0a16b;
-    margin-left: 230px;
-    margin-right: 20px;
-    min-width: 480px;
+    margin-left: 0px;
+    margin-right: 0px;
+    min-width: 280px;
     padding: 0;
 }
 .sortLink{
@@ -101,7 +93,6 @@
 .topFormLine{
     border-top: solid 4px #c0a16b;
     margin: 0;
-    min-width: 480px;
     padding: 0;
 }
 .topMenu{

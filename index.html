@@ -11,39 +11,42 @@
     <script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
-    <div class="logo"><img src="img/marvellogo.png" class="logo-marvel img-rounded center-block"></div>
-    <div class="btn-group topMenu">
-        <div class="btn-group">
-            <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-                Герої
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Some character 1</a></li>
-                <li><a href="#">Some character 2</a></li>
-                <li><a href="#">Some character 3</a></li>
-                <li><a href="#">Some character 4</a></li>
-                <li><a href="#">Some character 5</a></li>
-            </ul>
+    <div class="row">
+        <div class="logo"><img src="img/marvellogo.png" class="logo-marvel img-rounded center-block"></div>
+        <div class="btn-group topMenu">
+            <div class="btn-group">
+                <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+                    Герої
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <div id="dropdownHeroList"></div>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">
+                    Показати лише...
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Зображення</a></li>
+                    <li><a href="#">Імена</a></li>
+                    <li><a href="#">Зображення та імена</a></li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-warning" id="btn-slide" onclick="slideForm()">Додати нового героя + </button>
         </div>
-        <div class="btn-group">
-            <button type="button" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">
-                Показати лише...
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Зображення</a></li>
-                <li><a href="#">Імена</a></li>
-                <li><a href="#">Зображення та імена</a></li>
-            </ul>
-        </div>
-        <button type="button" class="btn btn-warning">Додати нового героя + </button>
     </div>
-    <div class="pagingButtons" id="pagingControls"></div>
-    <div class="productbox">
-        <div class="characterbox" id="charactersTemp"></div>
+    <div id="panel" class="row">
+        <h4 class="heading">Внесіть дані про нового героя</h4>
+        <input class="form-control" placeholder="найменування героя" required="" autofocus="" id="name">
+        <input class="form-control" placeholder="шлях до зображення" required="" id="imgSrc">
+        <button type="button" class="btn btn-primary center-block" onclick="parse_url()">Внести нові дані</button>
     </div>
-
+    <div class="pagingButtons row" id="pagingControls"></div>
+    <div class="productbox col-lg-8">
+        <div class="col-lg-8" id="charactersTemp"></div>
+    </div>
     <div class="panel-footer navbar-fixed-bottom">
         <p><h6 align="center">Вся інформація офіційно взята у компанії Marvel</h6></p>
     </div>
