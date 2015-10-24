@@ -41,6 +41,30 @@ function home(){
     document.location.href="/index.html?page=1";
 }
 
+function newCharacterArr(){
+    var characterId = newCharacterId();
+    var characterName = document.getElementById('characterName').value;
+    var characterImgSrc = document.getElementById('characterImgSrc').value;
+    characters.results.push({id: characterId, name: characterName, thumbnail: {path: characterImgSrc}});
+    noSort();
+    alert('Нові дані успішно внесені!');
+    document.getElementById('characterName').value = '';
+    document.getElementById('characterImgSrc').value = '';
+    console.log(characters.results);
+}
+
+function newCharacterId(){
+    var newId = 0;
+    for (var i = 0; i < characters.results.length; i++){
+        if (characters.results[i].id > newId){
+            newId = characters.results[i].id
+        }
+    }
+    newId += 1;
+    console.log(newId);
+    return newId;
+}
+
 function noSort(){
     $("#charactersTemp").html(renderHTML(characters));
 }

@@ -32,7 +32,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="#">Зображення</a></li>
                     <li><a href="#">Імена</a></li>
-                    <li><a href="#">Зображення та імена</a></li>
+                    <li><a href="#" onclick="newCharacterId()">Зображення та імена</a></li>
                 </ul>
             </div>
             <button type="button" class="btn btn-warning" id="btn-slide" onclick="slideForm()">Додати нового героя + </button>
@@ -40,9 +40,9 @@
     </div>
     <div id="panel" class="row">
         <h4 class="heading">Внесіть дані про нового героя</h4>
-        <input class="form-control" placeholder="найменування героя" required="" autofocus="" id="name">
-        <input class="form-control" placeholder="шлях до зображення" required="" id="imgSrc">
-        <button type="button" class="btn btn-primary center-block" onclick="parse_url()">Внести нові дані</button>
+        <input class="form-control" placeholder="найменування героя" required="" autofocus="" id="characterName">
+        <input class="form-control" placeholder="шлях до зображення" required="" id="characterImgSrc">
+        <button type="submit" class="btn btn-primary center-block" onclick="newCharacterArr()">Внести нові дані</button>
     </div>
     <div class="pagingButtons row" id="pagingControls"></div>
     <div class="productbox col-lg-8">
