@@ -1,10 +1,12 @@
 body{
-    background-image: url(/img/presence-ii.png);
+    background-image: url(/img/abstrakt-tile.jpg);
 }
 .center{
     text-align: center;
 }
 .characterbox{
+    background: rgba(0, 270, 200, 0.5);
+    color: #080808;
     float: left;
     padding: 5px 20px;
     position: relative;
@@ -18,6 +20,7 @@ body{
     margin-left: 230px;
 }
 .logo{
+    cursor: pointer;
     margin: 15px 0% 15px 0%;
 }
 .logo-marvel{

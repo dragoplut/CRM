@@ -37,6 +37,10 @@ function loadCharacters(callback){
     })
 }
 
+function home(){
+    document.location.href="/index.html?page=1";
+}
+
 function noSort(){
     $("#charactersTemp").html(renderHTML(characters));
 }
@@ -57,11 +61,22 @@ function parse_url(){
     return pageValue;
 }
 
+function removeCharacter(l){
+    var elem = document.getElementById(l);
+    elem.remove();
+    for (var j = 0; j < characters.results.length; j++){
+        if (characters.results[j].id === l){
+            characters.results.splice(j, 1);
+            break;
+        }
+    }
+}
+
 function renderHTML(characters){
     var blocks = [];
     for (var i = (numElem *(page - 1)); i < (numElem * page); i++){
         if (i < characters.results.length) {
-            var template = '<div class="characterbox" id="' + characters.results[i].id + '" name="tempDiv' + i + '"><img src="' + characters.results[i].thumbnail.path + '.' + characters.results[i].thumbnail.extension + '" align="left" class="demoimg img-rounded" alt="' + characters.results[i].name + '"><h5 class="center">' + characters.results[i].name + '</h5><h6 align="center"><a href="#" shape="rect">Видалити</a></h6></div>';
+            var template = '<div class="characterbox rounded" id="' + characters.results[i].id + '" name="tempDiv' + i + '"><img src="' + characters.results[i].thumbnail.path + '.' + characters.results[i].thumbnail.extension + '" align="left" class="demoimg img-rounded" alt="' + characters.results[i].name + '"><h5 class="center">' + characters.results[i].name + '</h5><h6 align="center"><a href="#" onclick="removeCharacter(' + characters.results[i].id + ')">Видалити</a></h6></div>';
         }
         blocks += template;
         template = '';
@@ -75,7 +90,7 @@ function renderHTML(characters){
     $("#pagingControls").html(pageControls);
     var HeroList = '';
     for (var l = 0; l < characters.results.length; l++){
-        HeroList += '<li id="dropdownHero"><a href="#">' + characters.results[l].name + '</a></li>';
+        HeroList += '<li id="dropdownHero"><a href="#">- ' + characters.results[l].name + '</a></li>';
     }
     $("#dropdownHeroList").html(HeroList);
     return blocks;
