@@ -6,14 +6,17 @@ $(function(){
 
 function clientsLoaded(data){
     clients = data;
-    console.log(clients);
 }
 
 function loadClients(callback){
     $.ajax({
         url: 'http://apishop.herokuapp.com/client',
         success: function(result){
-            callback(result.data);
+            callback(result);
         }
     })
+}
+
+function clientsBase(){
+    console.log(clients);
 }
