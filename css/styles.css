@@ -1,7 +1,14 @@
 body {
-    padding-top: 40px;
+    padding-top: 30px;
+}
+.demoImg{
+    width: 50px;
+    height: 50px;
 }
 .starter-template {
-    padding: 40px 15px;
+    padding: 10px 15px;
     text-align: center;
+}
+.table-clients{
+    margin: 0px 15px;
 }
