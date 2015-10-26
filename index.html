@@ -1,55 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>MARVEL</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+    <title>CRM</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-    <div class="row">
-        <div class="logo"><img src="img/marvellogo.png" class="logo-marvel img-rounded center-block" onclick="home()"></div>
-        <div class="btn-group topMenu">
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary" onclick="home()">На головну</button>
-                <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-                    Герої
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <div id="dropdownHeroList"></div>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button type="button" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">
-                    Показати лише...
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Зображення</a></li>
-                    <li><a href="#">Імена</a></li>
-                    <li><a href="#" onclick="newCharacterId()">Зображення та імена</a></li>
-                </ul>
-            </div>
-            <button type="button" class="btn btn-warning" id="btn-slide" onclick="slideForm()">Додати нового героя + </button>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Клієнтська база</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">На головну</a></li>
+                <li><a href="#">Додати нового</a></li>
+                <li><a href="#">нова кнопка</a></li>
+            </ul>
         </div>
     </div>
-    <div id="panel" class="row">
-        <h4 class="heading">Внесіть дані про нового героя</h4>
-        <input class="form-control" placeholder="найменування героя" required="" autofocus="" id="characterName">
-        <input class="form-control" placeholder="шлях до зображення" required="" id="characterImgSrc">
-        <button type="submit" class="btn btn-primary center-block" onclick="newCharacterArr()">Внести нові дані</button>
+</nav>
+
+<div class="container">
+    <div class="starter-template">
+        <h1>База даних клієнтів</h1>
+        <p class="lead">Завдання для реалізації:<br> 1) Підключення бази із сервера через аякс. 2) Рендер таблиці із даними з масиву.<br> 3) Реалізація onclick popup по клієнту. 4) get, post, put, delete. </p>
     </div>
-    <div class="pagingButtons row" id="pagingControls"></div>
-    <div class="productbox col-lg-8">
-        <div class="col-lg-8" id="charactersTemp"></div>
-    </div>
-    <div class="panel-footer navbar-fixed-bottom">
-        <p><h6 align="center">Вся інформація офіційно взята у компанії Marvel</h6></p>
-    </div>
+</div>
+
 </body>
 </html>
