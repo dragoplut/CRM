@@ -3,13 +3,17 @@ body {
 }
 .bigImg{
     float: left;
+    margin: 20px;
     position: relative;
     height: 128px;
     width: 128px;
 }
 .demoImg{
-    height: 50px;
-    width: 50px;
+    height: 80px;
+    width: 80px;
+}
+.fixMaxWith{
+    max-width: 580px;
 }
 .starter-template {
     padding: 10px 15px;
