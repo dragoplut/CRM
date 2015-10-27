@@ -4,6 +4,18 @@ $(function(){
     loadClients(clientsLoaded);
 });
 
+function clearForm(){
+    document.getElementById('lastName').value = '';
+    document.getElementById('firstName').value = '';
+    document.getElementById('middleName').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('address').value = '';
+    document.getElementById('company').value = '';
+    document.getElementById('image').value = '';
+    document.getElementById('description').value = '';
+}
+
 function clientsBase(){
     console.log(clients);
 }
@@ -14,19 +26,25 @@ function clientsLoaded(data){
 }
 
 function deleteClient(clientId){
-    var id = {id: clientId};
-    var elem = document.getElementById(clientId);
-    elem.remove();
-    $.ajax({
-        type: 'DELETE',
-        url: 'http://apishop.herokuapp.com/client',
-        data: id,
-        success: function(result){
-            clients = result;
-            loadClients(clientsLoaded);
-            alert("Видалено клієнта id: " + clientId);
-        }
-    })
+    if (confirm('Ви впевнені що хочете видалити цього клієнта?')){
+        var id = {id: clientId};
+        var elem = document.getElementById(clientId);
+        elem.remove();
+        $.ajax({
+            type: 'DELETE',
+            url: 'http://apishop.herokuapp.com/client',
+            data: id,
+            success: function(result){
+                clients = result;
+                loadClients(clientsLoaded);
+                alert("Видалено клієнта id: " + clientId);
+            }
+        })
+    }
+}
+
+function editClient(){
+
 }
 
 function enableBtn(){
@@ -76,7 +94,7 @@ function renderDetails(clientId){
 function renderHTML(clients){
     var blocks = [];
     for (var i = 0; i < clients.length; i++){
-        var template = '<tr class="success" id="' + clients[i].id + '"><td><a href="#editClient" data-toggle="modal">Редагувати</a><br><a href="#" onclick="deleteClient(\'' + clients[i].id + '\')">Видалити</a><br><a href="#clientDetailsForm" data-toggle="modal" onclick="renderDetails(\'' + clients[i].id + '\')">Детальніше</a></td><td><img class="img-rounded demoImg" src="' + clients[i].image + '"></td><td>' + clients[i].lastName + '</td><td>' + clients[i].firstName + '</td><td>' + clients[i].phone + '</td><td>' + clients[i].email + '</td><td>' + clients[i].address + '</td></tr>';
+        var template = '<tr class="success" id="' + clients[i].id + '"><td class="text-center"><a title="Детальніше" href="#clientDetailsForm" data-toggle="modal" onclick="renderDetails(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-file"></span></a><br><a title="Редагувати" href="#editClient" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></a><br><a title="Видалити" href="#" onclick="deleteClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-trash"></span></a></td><td><img class="img-rounded demoImg" src="' + clients[i].image + '"></td><td>' + clients[i].lastName + '</td><td>' + clients[i].firstName + '</td><td>' + clients[i].phone + '</td><td>' + clients[i].email + '</td></tr>';
         blocks += template;
     }
     return blocks;

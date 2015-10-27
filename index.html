@@ -10,6 +10,7 @@
     <link rel="icon" href="">
     <title>CRM</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/css/styles.css" rel="stylesheet">
 </head>
 
@@ -39,7 +40,7 @@
 <div class="container">
     <div class="starter-template">
         <h1>База даних клієнтів</h1>
-        <p class="lead">Завдання для реалізації:<br> 1) Підключення бази із сервера через аякс. 2) Рендер таблиці із даними з масиву.<br> 3) Реалізація onclick popup по клієнту. 4) get, post, put, delete. </p>
+        <p class="lead">Завдання для реалізації:<br> 1) Функціонал: "Очистити", "Редагувати". 2) Пагінація, сортування.<br> 3) Пошук по input.</p>
     </div>
 </div>
 
@@ -54,7 +55,6 @@
                 <th class="text-center">Ім’я</th>
                 <th class="text-center">Телефон</th>
                 <th class="text-center">Е-мейл</th>
-                <th class="text-center">Адреса</th>
             </tr>
         </thead>
         <tbody id="blankTr">
@@ -98,9 +98,9 @@
                 <p>* обов’язкові до заповнення поля</p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-default pull-left" type="reset" onclick="enableBtn()">Очистити форму</a>
+                <a class="btn btn-default pull-left" type="reset" onclick="clearForm()">Очистити форму</a>
                 <a class="btn btn-default" data-dismiss="modal">Повернутись</a>
-                <a class="btn btn-primary" type="submit" id="newClientBtn" onclick="newClient()" disabled>Додати нового клієнта</a>
+                <a class="btn btn-primary" type="submit" id="newClientBtn" onclick="newClient()">Додати нового клієнта</a>
             </div>
         </div>
     </div>
