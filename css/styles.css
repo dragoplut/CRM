@@ -15,6 +15,18 @@ body {
 .fixMaxWith{
     max-width: 580px;
 }
+.formInput{
+    float: right;
+    margin: 2px 0px;
+    width: 70%;
+}
+.formLabel{
+    float: left;
+    margin: 2px 0px;
+    padding: 7px 0px;
+    position: relative;
+    width: 30%;
+}
 .starter-template {
     padding: 10px 15px;
     text-align: center;
