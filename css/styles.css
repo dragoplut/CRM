@@ -12,6 +12,12 @@ body {
     height: 80px;
     width: 80px;
 }
+.editImg{
+    float: left;
+    margin-left: 10%;
+    height: 65px;
+    width: 65px;
+}
 .fixMaxWith{
     max-width: 580px;
 }

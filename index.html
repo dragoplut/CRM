@@ -29,8 +29,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">На головну</a></li>
-                <li><a href="#newClientForm" data-toggle="modal">Додати нового</a></li>
+                <li class="active"><a href="/index.html"">На головну</a></li>
+                <li><a href="#" onclick="newClient()">Додати нового</a></li>
                 <li><a href="#" onclick="clientsBase()">console.log(clients)</a></li>
             </ul>
         </div>
@@ -82,9 +82,7 @@
 <div class="modal fade" id="newClientForm" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="text-center">Форма внесення нового клієнта</h4>
-            </div>
+            <div class="modal-header" id="headerEditModal"></div>
             <div class="modal-body">
                 <p class="formLabel">Фамілія*: </p><input type="text" class="form-control formInput" id="lastName">
                 <p class="formLabel">Ім’я*: </p><input type="text" class="form-control formInput" id="firstName">
@@ -97,11 +95,7 @@
                 <p class="formLabel">Коротко про себе:</p><textarea cols="50" rows="3" class="form-control" id="description"></textarea>
                 <p>* обов’язкові до заповнення поля</p>
             </div>
-            <div class="modal-footer">
-                <a class="btn btn-default pull-left" type="reset" onclick="clearForm()">Очистити форму</a>
-                <a class="btn btn-default" data-dismiss="modal">Повернутись</a>
-                <a class="btn btn-primary" type="submit" id="newClientBtn" onclick="newClient()">Додати нового клієнта</a>
-            </div>
+            <div class="modal-footer" id="footerEditModal"></div>
         </div>
     </div>
 </div>
