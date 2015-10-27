@@ -55,7 +55,7 @@ function newClient(){
     var newdescription = document.getElementById('description').value;
     if (document.getElementById('lastName').value != false & document.getElementById('firstName').value != false & document.getElementById('email').value != false){
         newClientArr.push({address: newaddress, company: newcompany, description: newdescription, email: newemail, firstName: newfirstName, image: newimage, lastName: newlastName, middleName: newmiddleName, phone: newphone});
-        updateREST(newClientArr);
+        updateREST({address: newaddress, company: newcompany, description: newdescription, email: newemail, firstName: newfirstName, image: newimage, lastName: newlastName, middleName: newmiddleName, phone: newphone});
         console.log(newClientArr);
     }
     else{
@@ -86,8 +86,7 @@ function renderTable(){
     $("#blankTr").html(renderHTML(clients));
 }
 
-function updateREST(newClientArr){
-    var addClient = newClientArr;
+function updateREST(addClient){
     console.log(addClient);
     $.ajax({
         url: 'http://apishop.herokuapp.com/client',
