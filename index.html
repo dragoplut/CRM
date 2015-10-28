@@ -29,10 +29,22 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/index.html"">На головну</a></li>
+                <li><a href="/index.html">На головну</a></li>
                 <li><a href="#" onclick="newClient()">Додати нового</a></li>
-                <li><a href="#" onclick="clientsBase()">console.log(clients)</a></li>
+                <li><a href="#" onclick="clientsBase()">Arr</a></li>
             </ul>
+            <div class="form-group searchBar" id="dropdownSearchLi">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-search searchSpan" title="Знайти" onclick="searchClient()"></span>
+                    <input class="form-control" id="searchRequest" placeholder="Пошук" type="text">
+                    <div class="input-group-btn searchSelector">
+                        <select class="form-control" onchange="searchOption=value" id="selectorSearch">
+                            <option value="lastName" selected>Фамілія</option>
+                            <option value="firstName">Ім’я</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
@@ -40,7 +52,7 @@
 <div class="container">
     <div class="starter-template">
         <h2>База даних клієнтів</h2>
-        <p class="lead">Завдання для реалізації:<br> 1) Функціонал: "Очистити", "Редагувати".<br> 2) Пагінація, сортування. 3) Пошук по input.</p>
+        <p class="lead">Завдання для реалізації: 1) Сортування.</p>
     </div>
 </div>
 

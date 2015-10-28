@@ -41,6 +41,18 @@ body {
     position: relative;
     text-align: center;
 }
+.searchBar{
+    float: right;
+    margin-top: 9px;
+    margin-bottom: 0px;
+    max-width: 250px;
+}
+.searchSelector{
+    width: 40%;
+}
+.searchSpan{
+    top: 0px;
+}
 .starter-template {
     padding: 0px 15px;
     text-align: center;

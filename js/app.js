@@ -1,7 +1,8 @@
 var clients = [];
-var numOnPage = 6;
+var numOnPage = 7;
 var page = 1;
 var pageValue = 0;
+var searchOption = 'lastName';
 
 $(function(){
     parseUrl();
@@ -10,6 +11,12 @@ $(function(){
     }else{
         pageValue = page;
         pagination(page);
+    }
+});
+
+$("#searchRequest").keypress(function(event){
+    if(event.keyCode == 13) {
+        searchClient();
     }
 });
 
@@ -106,6 +113,7 @@ function loadClients(callback){
             console.log(result);
             if (result.length < 1){
                 controlsFwdBwd(0);
+                alert('Це була остання сторінка.');
             }else{
             callback(result);
             }
@@ -195,6 +203,23 @@ function saveClientChanges(j){
     }else{
         alert('Ви не внесли змін, запис не оновлено!');
     }
+}
+
+function searchClient(){
+    var request = document.getElementById('searchRequest').value;
+    var urlRequest = 'http://apishop.herokuapp.com/client?where={"' + searchOption + '":{"contains":"' + request + '"}}';
+    $.ajax({
+        url: urlRequest,
+        success: function(result){
+            console.log(result);
+            if (result.length < 1){
+                controlsFwdBwd(0);
+                alert('За вашим запитом нічого не знайдено.');
+            }else{
+                clientsLoaded(result);
+            }
+        }
+    })
 }
 
 function updateREST(addClient){
