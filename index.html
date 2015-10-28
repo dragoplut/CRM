@@ -39,14 +39,14 @@
 
 <div class="container">
     <div class="starter-template">
-        <h1>База даних клієнтів</h1>
-        <p class="lead">Завдання для реалізації:<br> 1) Функціонал: "Очистити", "Редагувати". 2) Пагінація, сортування.<br> 3) Пошук по input.</p>
+        <h2>База даних клієнтів</h2>
+        <p class="lead">Завдання для реалізації:<br> 1) Функціонал: "Очистити", "Редагувати".<br> 2) Пагінація, сортування. 3) Пошук по input.</p>
     </div>
 </div>
 
 <div class="table-responsive table-clients">
     <table class="table table-condensed">
-        <caption class="text-center">Таблиця клієнтів</caption>
+        <caption class="text-center">Таблиця клієнтів<div class="btn-group-sm center-block" id="pagingControls"></div></caption>
         <thead>
             <tr>
                 <th class="text-center">Дія</th>
@@ -64,6 +64,7 @@
         </tbody>
     </table>
 </div>
+<div class="starter-template btn-group-sm center-block" id="pagingControls2"></div>
 
 <div class="modal fade" id="clientDetailsForm" role="dialog">
     <div class="modal-dialog">

@@ -1,5 +1,5 @@
 body {
-    padding-top: 30px;
+    padding-top: 45px;
 }
 .bigImg{
     float: left;
@@ -9,8 +9,9 @@ body {
     width: 128px;
 }
 .demoImg{
-    height: 80px;
-    width: 80px;
+    cursor: pointer;
+    height: 60px;
+    width: 60px;
 }
 .editImg{
     float: left;
@@ -33,8 +34,15 @@ body {
     position: relative;
     width: 30%;
 }
+.pagingButtons {
+    display: inline;
+    list-style-type: none;
+    margin: 0 6px;
+    position: relative;
+    text-align: center;
+}
 .starter-template {
-    padding: 10px 15px;
+    padding: 0px 15px;
     text-align: center;
 }
 .table-clients{

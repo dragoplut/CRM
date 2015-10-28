@@ -1,7 +1,16 @@
 var clients = [];
+var numOnPage = 6;
+var page = 1;
+var pageValue = 0;
 
 $(function(){
-    loadClients(clientsLoaded);
+    parseUrl();
+    if(pageValue != undefined & pageValue != 0){
+        pagination(pageValue);
+    }else{
+        pageValue = page;
+        pagination(page);
+    }
 });
 
 function clearForm(){
@@ -25,6 +34,15 @@ function clientsLoaded(data){
     $("#blankTr").html(renderHTML(clients));
 }
 
+function controlsFwdBwd(direction){
+    if (direction == 1){
+        pageValue = Number(pageValue) + 1;
+    }else{
+        pageValue = Number(pageValue) - 1;
+    }
+    pagination(pageValue);
+}
+
 function deleteClient(clientId){
     if (confirm('Ви впевнені що хочете видалити цього клієнта?')){
         var id = {id: clientId};
@@ -40,6 +58,16 @@ function deleteClient(clientId){
                 alert("Видалено клієнта id: " + clientId);
             }
         })
+    }
+}
+
+function demoImgSize(status, id){
+    if (status == 1){
+        document.getElementById(id).style.height = '70px';
+        document.getElementById(id).style.width = '70px';
+    }else{
+        document.getElementById(id).style.height = '60px';
+        document.getElementById(id).style.width = '60px';
     }
 }
 
@@ -70,10 +98,17 @@ function enableBtn(){
 };
 
 function loadClients(callback){
+    var skipInRequest =(numOnPage*(pageValue-1));
+    var urlRequest = 'http://apishop.herokuapp.com/client?limit=' + numOnPage + '&skip=' + skipInRequest;
     $.ajax({
-        url: 'http://apishop.herokuapp.com/client',
+        url: urlRequest,
         success: function(result){
+            console.log(result);
+            if (result.length < 1){
+                controlsFwdBwd(0);
+            }else{
             callback(result);
+            }
         }
     })
 }
@@ -96,6 +131,25 @@ function newClientSave(){
     }
 }
 
+function parseUrl(){
+    var parser = /page=([^&]+)/i;
+    if (!!parser.exec(document.location.search)){
+        pageValue = parser.exec(document.location.search)[1];
+    }
+    return pageValue;
+}
+
+function pagination(num){
+    var pageNum = num;
+    if (num < 1){
+        pageNum = page;
+        pageValue = page;
+    }
+    var urlPart = "/index.html?page=" + pageNum;
+    history.pushState(pageNum, "CRM", urlPart);
+    loadClients(clientsLoaded);
+}
+
 function renderDetails(clientId){
     var clientRendered = '';
     for (var i = 0; i < clients.length; i++){
@@ -109,9 +163,12 @@ function renderDetails(clientId){
 function renderHTML(clients){
     var blocks = [];
     for (var i = 0; i < clients.length; i++){
-        var template = '<tr class="success" id="' + clients[i].id + '"><td class="text-center"><a title="Детальніше" href="#clientDetailsForm" data-toggle="modal" onclick="renderDetails(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-file"></span></a><br><a title="Редагувати" href="#editClient" data-toggle="modal" onclick="editClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-pencil"></span></a><br><a title="Видалити" href="#" onclick="deleteClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-trash"></span></a></td><td><img class="img-rounded demoImg" src="' + clients[i].image + '"></td><td>' + clients[i].lastName + '</td><td>' + clients[i].firstName + '</td><td>' + clients[i].phone + '</td><td>' + clients[i].email + '</td></tr>';
+        var template = '<tr class="success" id="' + clients[i].id + '"><td class="text-center"><a title="Детальніше" href="#clientDetailsForm" data-toggle="modal" onclick="renderDetails(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-file"></span></a><br><a title="Редагувати" href="#editClient" data-toggle="modal" onclick="editClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-pencil"></span></a><br><a title="Видалити" href="#" onclick="deleteClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-trash"></span></a></td><td class="text-center center-block"><img class="img-rounded demoImg" onmouseover="demoImgSize(1, this.id)" onmouseout="demoImgSize(0, this.id)" src="' + clients[i].image + '" id="demoImg' + clients[i].id + '"></td><td>' + clients[i].lastName + '</td><td>' + clients[i].firstName + '</td><td>' + clients[i].phone + '</td><td>' + clients[i].email + '</td></tr>';
         blocks += template;
     }
+    var pagingControls = '<a class="pagingButtons" title="Попередня сторінка" onclick="controlsFwdBwd(0)"><span class="glyphicon glyphicon-backward"></span></a><a class="pagingButtons">' + pageValue + '</a><a class="pagingButtons" title="Наступна сторінка" onclick="controlsFwdBwd(1)"><span class="glyphicon glyphicon-forward"></span></a>';
+    $("#pagingControls").html(pagingControls);
+    $("#pagingControls2").html(pagingControls);
     return blocks;
 }
 
@@ -149,7 +206,7 @@ function updateREST(addClient){
         success: function(result){
             clients = result;
             loadClients(clientsLoaded);
-            alert('Масив успішно створений. Глянь в консольку ;-).');
+            alert('Нового клієнта успішно створено і додано в базу.');
         },
         error: function(){
             alert('Помилка при внесенні/оновленні даних на серврер!');
