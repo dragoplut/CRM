@@ -8,7 +8,6 @@ var searchOption = 'lastName';
 $(function(){
     parseUrl();
     if(pageValue != undefined & pageValue != 0){
-        debugger;
         if(sortDirect=='none'){
             pagination();
         }else{
