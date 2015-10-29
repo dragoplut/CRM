@@ -8,14 +8,15 @@ var searchOption = 'lastName';
 $(function(){
     parseUrl();
     if(pageValue != undefined & pageValue != 0){
-        if(sortDirect='none'){
-            pagination(pageValue);
+        debugger;
+        if(sortDirect=='none'){
+            pagination();
         }else{
             sortClient(sortDirect);
         }
     }else{
         pageValue = page;
-        pagination(page);
+        pagination();
     }
 });
 
@@ -145,27 +146,43 @@ function newClientSave(){
 }
 
 function parseUrl(){
-    var parser = /page=([^&])+sortDir=([^&]+)/i;
-    if (!!parser.exec(document.location.search)){
-        pageValue = parser.exec(document.location.search)[1];
-        sortDirect = parser.exec(document.location.search)[2];
+    var rQS = readQueryString();
+    if(rQS != undefined){
+        pageValue = rQS.page;
+        sortDirect = rQS.sortDir;
+    }else{
+        pageValue = 1;
+        sortDirect = 'none';
     }
-    console.log(sortDirect);
+    console.log(pageValue,sortDirect);
     return pageValue, sortDirect;
 }
 
-function pagination(num){
-    var pageNum = num;
-    if (num < 1){
+function pagination(){
+    var pageNum = pageValue;
+    if (pageNum < 1){
         pageNum = page;
         pageValue = page;
     }
     var urlPart = "/index.html?page=" + pageNum + '&sortDir=' + sortDirect;
     history.pushState(pageNum, "CRM", urlPart);
-    if(sortDirect=='none'){
+    if(sortDirect == 'none'){
     loadClients(clientsLoaded);
     }else{
         sortClient();
+    }
+}
+
+function readQueryString(){
+    var a = window.location.search.split(/\?/);
+    if(a[1] != undefined) {
+        var b = a[1].split("&");
+        var c = {};
+        for (var i = 0; i < b.length; i++) {
+            var d = b[i].split("=");
+            c[d[0]] = d[1];
+        }
+        return c;
     }
 }
 
@@ -185,8 +202,8 @@ function renderHTML(clients){
         var template = '<tr class="success" id="' + clients[i].id + '"><td class="text-center"><a title="Детальніше" href="#clientDetailsForm" data-toggle="modal" onclick="renderDetails(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-file"></span></a><br><a title="Редагувати" href="#editClient" data-toggle="modal" onclick="editClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-pencil"></span></a><br><a title="Видалити" href="#" onclick="deleteClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-trash"></span></a></td><td class="text-center center-block"><img class="img-rounded demoImg" onmouseover="demoImgSize(1, this.id)" onmouseout="demoImgSize(0, this.id)" src="' + clients[i].image + '" id="demoImg' + clients[i].id + '"></td><td>' + clients[i].lastName + '</td><td>' + clients[i].firstName + '</td><td>' + clients[i].phone + '</td><td>' + clients[i].email + '</td></tr>';
         blocks += template;
     }
-    var sortLastName = 'Фамілія<a class="pagingButtons" title="За зростанням" onclick="sortDirect=1,pagination(pageValue)"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=0,pagination(pageValue)"><span class="glyphicon glyphicon-chevron-up"></span></a>';
-    var sortFirstName = 'Ім’я<a class="pagingButtons" title="За зростанням" onclick="sortDirect=3,pagination(pageValue)"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=2,pagination(pageValue)"><span class="glyphicon glyphicon-chevron-up"></span></a>';
+    var sortLastName = 'Фамілія<a class="pagingButtons" title="За зростанням" onclick="sortDirect=1,pagination()"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=0,pagination()"><span class="glyphicon glyphicon-chevron-up"></span></a>';
+    var sortFirstName = 'Ім’я<a class="pagingButtons" title="За зростанням" onclick="sortDirect=3,pagination()"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=2,pagination()"><span class="glyphicon glyphicon-chevron-up"></span></a>';
     var pagingControls = '<a class="pagingButtons" title="Попередня сторінка" onclick="controlsFwdBwd(0)"><span class="glyphicon glyphicon-backward"></span></a><a class="pagingButtons">' + pageValue + '</a><a class="pagingButtons" title="Наступна сторінка" onclick="controlsFwdBwd(1)"><span class="glyphicon glyphicon-forward"></span></a>';
     $("#sortLastName").html(sortLastName);
     $("#sortFirstName").html(sortFirstName);
