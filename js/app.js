@@ -2,12 +2,17 @@ var clients = [];
 var numOnPage = 7;
 var page = 1;
 var pageValue = 0;
+var sortDirect = 'none';
 var searchOption = 'lastName';
 
 $(function(){
     parseUrl();
     if(pageValue != undefined & pageValue != 0){
-        pagination(pageValue);
+        if(sortDirect='none'){
+            pagination(pageValue);
+        }else{
+            sortClient(sortDirect);
+        }
     }else{
         pageValue = page;
         pagination(page);
@@ -140,11 +145,13 @@ function newClientSave(){
 }
 
 function parseUrl(){
-    var parser = /page=([^&]+)/i;
+    var parser = /page=([^&])+sortDir=([^&]+)/i;
     if (!!parser.exec(document.location.search)){
         pageValue = parser.exec(document.location.search)[1];
+        sortDirect = parser.exec(document.location.search)[2];
     }
-    return pageValue;
+    console.log(sortDirect);
+    return pageValue, sortDirect;
 }
 
 function pagination(num){
@@ -153,9 +160,13 @@ function pagination(num){
         pageNum = page;
         pageValue = page;
     }
-    var urlPart = "/index.html?page=" + pageNum;
+    var urlPart = "/index.html?page=" + pageNum + '&sortDir=' + sortDirect;
     history.pushState(pageNum, "CRM", urlPart);
+    if(sortDirect=='none'){
     loadClients(clientsLoaded);
+    }else{
+        sortClient();
+    }
 }
 
 function renderDetails(clientId){
@@ -174,7 +185,11 @@ function renderHTML(clients){
         var template = '<tr class="success" id="' + clients[i].id + '"><td class="text-center"><a title="Детальніше" href="#clientDetailsForm" data-toggle="modal" onclick="renderDetails(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-file"></span></a><br><a title="Редагувати" href="#editClient" data-toggle="modal" onclick="editClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-pencil"></span></a><br><a title="Видалити" href="#" onclick="deleteClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-trash"></span></a></td><td class="text-center center-block"><img class="img-rounded demoImg" onmouseover="demoImgSize(1, this.id)" onmouseout="demoImgSize(0, this.id)" src="' + clients[i].image + '" id="demoImg' + clients[i].id + '"></td><td>' + clients[i].lastName + '</td><td>' + clients[i].firstName + '</td><td>' + clients[i].phone + '</td><td>' + clients[i].email + '</td></tr>';
         blocks += template;
     }
+    var sortLastName = 'Фамілія<a class="pagingButtons" title="За зростанням" onclick="sortDirect=1,pagination(pageValue)"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=0,pagination(pageValue)"><span class="glyphicon glyphicon-chevron-up"></span></a>';
+    var sortFirstName = 'Ім’я<a class="pagingButtons" title="За зростанням" onclick="sortDirect=3,pagination(pageValue)"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=2,pagination(pageValue)"><span class="glyphicon glyphicon-chevron-up"></span></a>';
     var pagingControls = '<a class="pagingButtons" title="Попередня сторінка" onclick="controlsFwdBwd(0)"><span class="glyphicon glyphicon-backward"></span></a><a class="pagingButtons">' + pageValue + '</a><a class="pagingButtons" title="Наступна сторінка" onclick="controlsFwdBwd(1)"><span class="glyphicon glyphicon-forward"></span></a>';
+    $("#sortLastName").html(sortLastName);
+    $("#sortFirstName").html(sortFirstName);
     $("#pagingControls").html(pagingControls);
     $("#pagingControls2").html(pagingControls);
     return blocks;
@@ -215,6 +230,37 @@ function searchClient(){
             if (result.length < 1){
                 controlsFwdBwd(0);
                 alert('За вашим запитом нічого не знайдено.');
+            }else{
+                clientsLoaded(result);
+            }
+        }
+    })
+}
+
+function sortClient(){
+    if(sortDirect == 0){
+        direction = 'DESC';
+        searchOption = 'lastName';
+    }else if(sortDirect == 1){
+        direction = 'ASC';
+        searchOption = 'lastName';
+    }else if(sortDirect == 2){
+        direction = 'DESC';
+        searchOption = 'firstName';
+    }else{
+        direction = 'ASC';
+        searchOption = 'firstName';
+    }
+
+    var skipInRequest =(numOnPage*(pageValue-1));
+    var urlRequest = 'http://apishop.herokuapp.com/client?sort=' + searchOption + '%20' + direction + '&limit=' + numOnPage + '&skip=' + skipInRequest;
+    $.ajax({
+        url: urlRequest,
+        success: function(result){
+            console.log(result);
+            if (result.length < 1){
+                location.href = '/index.html';
+                alert('Помилка запиту сортування.');
             }else{
                 clientsLoaded(result);
             }

@@ -51,6 +51,7 @@ body {
     width: 40%;
 }
 .searchSpan{
+    cursor: pointer;
     top: 0px;
 }
 .starter-template {
