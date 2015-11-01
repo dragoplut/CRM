@@ -1,14 +1,18 @@
 var clients = [];
+var fnASC = 'fnASC';
+var fnDESC = 'fnDESC';
+var lnASC = 'lnASC';
+var lnDESC = 'lnDESC';
 var numOnPage = 7;
 var page = 1;
 var pageValue = 0;
-var sortDirect = 'none';
+var sortDirect = 'lnASC';
 var searchOption = 'lastName';
 
 $(function(){
     parseUrl();
     if(pageValue != undefined & pageValue != 0){
-        if(sortDirect=='none'){
+        if(sortDirect=='none' || sortDirect=='false'){
             pagination();
         }else{
             sortClient(sortDirect);
@@ -26,15 +30,15 @@ $("#searchRequest").keypress(function(event){
 });
 
 function clearForm(){
-    document.getElementById('lastName').value = '';
-    document.getElementById('firstName').value = '';
-    document.getElementById('middleName').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('phone').value = '';
-    document.getElementById('address').value = '';
-    document.getElementById('company').value = '';
-    document.getElementById('image').value = '';
-    document.getElementById('description').value = '';
+    $('#lastName').val('');
+    $('#firstName').val('');
+    $('#middleName').val('');
+    $('#email').val('');
+    $('#phone').val('');
+    $('#address').val('');
+    $('#company').val('');
+    $('#image').val('');
+    $('#description').val('');
 }
 
 function clientsBase(){
@@ -52,7 +56,7 @@ function controlsFwdBwd(direction){
     }else{
         pageValue = Number(pageValue) - 1;
     }
-    pagination(pageValue);
+    pagination();
 }
 
 function deleteClient(clientId){
@@ -66,7 +70,7 @@ function deleteClient(clientId){
             data: id,
             success: function(result){
                 clients = result;
-                loadClients(clientsLoaded);
+                pagination();
                 alert("Видалено клієнта id: " + clientId);
             }
         })
@@ -86,18 +90,18 @@ function demoImgSize(status, id){
 function editClient(clientId){
     clearForm();
     for (var i = 0; i < clients.length; i++){
-        if (clients[i].id === clientId){
+        if (clients[i].id === clientId) {
             var headerRendered = '<img class="img-rounded editImg" src="' + clients[i].image + '"><h4 class="text-center">Форма редагування клієнта<br>' + clientId + '</h4>';
             var footerRendered = '<a class="btn btn-default pull-left" type="reset" onclick="clearForm()">Очистити форму</a><a class="btn btn-default" data-dismiss="modal">Повернутись</a><a class="btn btn-primary" type="submit" id="newClientBtn" onclick="saveClientChanges(' + i + ')">Зберегти зміти</a>';
-            document.getElementById('lastName').value = clients[i].lastName;
-            document.getElementById('firstName').value = clients[i].firstName;
-            document.getElementById('middleName').value = clients[i].middleName;
-            document.getElementById('email').value = clients[i].email;
-            document.getElementById('phone').value = clients[i].phone;
-            document.getElementById('address').value = clients[i].address;
-            document.getElementById('company').value = clients[i].company;
-            document.getElementById('image').value = clients[i].image;
-            document.getElementById('description').value = clients[i].description;
+            $('#lastName').val(clients[i].lastName);
+            $('#firstName').val(clients[i].firstName);
+            $('#middleName').val(clients[i].middleName);
+            $('#email').val(clients[i].email);
+            $('#phone').val(clients[i].phone);
+            $('#address').val(clients[i].address);
+            $('#company').val(clients[i].company);
+            $('#image').val(clients[i].image);
+            $('#description').val(clients[i].description);
         }
     }
     $("#headerEditModal").html(headerRendered);
@@ -105,9 +109,21 @@ function editClient(clientId){
     $("#newClientForm").modal('show');
 }
 
-function enableBtn(){
+function enableBtn(){   // тестовий код
     $("#newClientBtn").removeAttr('disabled');
 };
+
+function getQueryVariable(variable){
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++){
+        var pair = vars[i].split("=");
+        if (pair[0] == variable){
+            return pair[1];
+        }
+    }
+    return(false);
+}
 
 function loadClients(callback){
     var skipInRequest =(numOnPage*(pageValue-1));
@@ -145,43 +161,26 @@ function newClientSave(){
 }
 
 function parseUrl(){
-    var rQS = readQueryString();
-    if(rQS != undefined){
-        pageValue = rQS.page;
-        sortDirect = rQS.sortDir;
+    if(getQueryVariable('page')){
+        numOnPage = getQueryVariable('onPage');
+        pageValue = getQueryVariable('page');
+        sortDirect = getQueryVariable('sortDir');
     }else{
         pageValue = 1;
-        sortDirect = 'none';
+        sortDirect = 'lnASC';
     }
-    console.log(pageValue,sortDirect);
-    return pageValue, sortDirect;
 }
 
 function pagination(){
-    var pageNum = pageValue;
-    if (pageNum < 1){
-        pageNum = page;
+    if (pageValue < 1){
         pageValue = page;
     }
-    var urlPart = "/index.html?page=" + pageNum + '&sortDir=' + sortDirect;
-    history.pushState(pageNum, "CRM", urlPart);
-    if(sortDirect == 'none'){
+    var urlPart = '/index.html?onPage=' + numOnPage + '&page=' + pageValue + '&sortDir=' + sortDirect;
+    history.pushState(pageValue, "CRM", urlPart);
+    if(sortDirect == 'none' || sortDirect == 'false'){
     loadClients(clientsLoaded);
     }else{
         sortClient();
-    }
-}
-
-function readQueryString(){
-    var a = window.location.search.split(/\?/);
-    if(a[1] != undefined) {
-        var b = a[1].split("&");
-        var c = {};
-        for (var i = 0; i < b.length; i++) {
-            var d = b[i].split("=");
-            c[d[0]] = d[1];
-        }
-        return c;
     }
 }
 
@@ -201,8 +200,8 @@ function renderHTML(clients){
         var template = '<tr class="success" id="' + clients[i].id + '"><td class="text-center"><a title="Детальніше" href="#clientDetailsForm" data-toggle="modal" onclick="renderDetails(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-file"></span></a><br><a title="Редагувати" href="#editClient" data-toggle="modal" onclick="editClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-pencil"></span></a><br><a title="Видалити" href="#" onclick="deleteClient(\'' + clients[i].id + '\')"><span class="glyphicon glyphicon-trash"></span></a></td><td class="text-center center-block"><img class="img-rounded demoImg" onmouseover="demoImgSize(1, this.id)" onmouseout="demoImgSize(0, this.id)" src="' + clients[i].image + '" id="demoImg' + clients[i].id + '"></td><td>' + clients[i].lastName + '</td><td>' + clients[i].firstName + '</td><td>' + clients[i].phone + '</td><td>' + clients[i].email + '</td></tr>';
         blocks += template;
     }
-    var sortLastName = 'Фамілія<a class="pagingButtons" title="За зростанням" onclick="sortDirect=1,pagination()"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=0,pagination()"><span class="glyphicon glyphicon-chevron-up"></span></a>';
-    var sortFirstName = 'Ім’я<a class="pagingButtons" title="За зростанням" onclick="sortDirect=3,pagination()"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=2,pagination()"><span class="glyphicon glyphicon-chevron-up"></span></a>';
+    var sortLastName = 'Фамілія<a class="pagingButtons" title="За зростанням" onclick="sortDirect=lnASC ,pagination()"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=lnDESC,pagination()"><span class="glyphicon glyphicon-chevron-up"></span></a>';
+    var sortFirstName = 'Ім’я<a class="pagingButtons" title="За зростанням" onclick="sortDirect=fnASC ,pagination()"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=fnDESC,pagination()"><span class="glyphicon glyphicon-chevron-up"></span></a>';
     var pagingControls = '<a class="pagingButtons" title="Попередня сторінка" onclick="controlsFwdBwd(0)"><span class="glyphicon glyphicon-backward"></span></a><a class="pagingButtons">' + pageValue + '</a><a class="pagingButtons" title="Наступна сторінка" onclick="controlsFwdBwd(1)"><span class="glyphicon glyphicon-forward"></span></a>';
     $("#sortLastName").html(sortLastName);
     $("#sortFirstName").html(sortFirstName);
@@ -224,7 +223,7 @@ function saveClientChanges(j){
             data: {address: document.getElementById('address').value, company: document.getElementById('company').value, description: document.getElementById('description').value, email: document.getElementById('email').value, firstName: document.getElementById('firstName').value, image: document.getElementById('image').value, lastName: document.getElementById('lastName').value, middleName: document.getElementById('middleName').value, phone: document.getElementById('phone').value},
             success: function(result){
                 clients = result;
-                loadClients(clientsLoaded);
+                pagination();
                 alert('Інформація про клієнта успішно оновлена!');
             },
             error: function(){
@@ -254,20 +253,23 @@ function searchClient(){
 }
 
 function sortClient(){
-    if(sortDirect == 0){
+    if(sortDirect == "lnDESC"){
         direction = 'DESC';
         searchOption = 'lastName';
-    }else if(sortDirect == 1){
+    }else if(sortDirect == "lnASC"){
         direction = 'ASC';
         searchOption = 'lastName';
-    }else if(sortDirect == 2){
+    }else if(sortDirect == "fnDESC"){
         direction = 'DESC';
+        searchOption = 'firstName';
+    }else if(sortDirect == "fnASC"){
+        direction = 'ASC';
         searchOption = 'firstName';
     }else{
         direction = 'ASC';
-        searchOption = 'firstName';
+        searchOption = 'lastName';
+        sortDirect = 'lnASC'
     }
-
     var skipInRequest =(numOnPage*(pageValue-1));
     var urlRequest = 'http://apishop.herokuapp.com/client?sort=' + searchOption + '%20' + direction + '&limit=' + numOnPage + '&skip=' + skipInRequest;
     $.ajax({
@@ -275,8 +277,13 @@ function sortClient(){
         success: function(result){
             console.log(result);
             if (result.length < 1){
-                location.href = '/index.html';
-                alert('Помилка запиту сортування.');
+                if (pageValue >= 1){
+                    controlsFwdBwd(0);
+                    alert('Це була остання сторінка.');
+                }else {
+                    location.href = '/index.html';
+                    alert('Помилка запиту сортування.');
+                }
             }else{
                 clientsLoaded(result);
             }
@@ -292,7 +299,7 @@ function updateREST(addClient){
         data: addClient,
         success: function(result){
             clients = result;
-            loadClients(clientsLoaded);
+            pagination();
             alert('Нового клієнта успішно створено і додано в базу.');
         },
         error: function(){
