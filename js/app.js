@@ -202,11 +202,11 @@ function renderHTML(clients){
     }
     var sortLastName = 'Фамілія<a class="pagingButtons" title="За зростанням" onclick="sortDirect=lnASC ,pagination()"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=lnDESC,pagination()"><span class="glyphicon glyphicon-chevron-up"></span></a>';
     var sortFirstName = 'Ім’я<a class="pagingButtons" title="За зростанням" onclick="sortDirect=fnASC ,pagination()"><span class="glyphicon glyphicon-chevron-down"></span></a><a class="pagingButtons" title="За спаданням" onclick="sortDirect=fnDESC,pagination()"><span class="glyphicon glyphicon-chevron-up"></span></a>';
-    var pagingControls = '<a class="pagingButtons" title="Попередня сторінка" onclick="controlsFwdBwd(0)"><span class="glyphicon glyphicon-backward"></span></a><a class="pagingButtons">' + pageValue + '</a><a class="pagingButtons" title="Наступна сторінка" onclick="controlsFwdBwd(1)"><span class="glyphicon glyphicon-forward"></span></a>';
+    var pagingControlsCli = '<a class="pagingButtons" title="Попередня сторінка" onclick="controlsFwdBwd(0)"><span class="glyphicon glyphicon-backward"></span></a><a class="pagingButtons">' + pageValue + '</a><a class="pagingButtons" title="Наступна сторінка" onclick="controlsFwdBwd(1)"><span class="glyphicon glyphicon-forward"></span></a>';
     $("#sortLastName").html(sortLastName);
     $("#sortFirstName").html(sortFirstName);
-    $("#pagingControls").html(pagingControls);
-    $("#pagingControls2").html(pagingControls);
+    $("#pagingControlsCliTop").html(pagingControlsCli);
+    $("#pagingControlsCliBot").html(pagingControlsCli);
     return blocks;
 }
 
@@ -275,7 +275,6 @@ function sortClient(){
     $.ajax({
         url: urlRequest,
         success: function(result){
-            console.log(result);
             if (result.length < 1){
                 if (pageValue >= 1){
                     controlsFwdBwd(0);
