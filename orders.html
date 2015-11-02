@@ -62,7 +62,7 @@
             <th class="text-center">Ціна</th>
             <th class="text-center">Дата оплати</th>
             <th class="text-center">Статус</th>
-            <th class="text-center" id="sortLastName"></th>
+            <th class="text-center" id="sortClientLnFn"></th>
         </tr>
         </thead>
         <tbody id="blankTrOrders">
@@ -88,9 +88,9 @@
                 <p class="formLabel">Дата оплати: </p><input type="date" class="form-control formInput" id="payDate">
                 <p class="formLabel">Статус*: </p>
                 <select class="form-control formInput" onchange="statusOption=value" id="selectorOrderStatus">
-                    <option value="Нове" selected>Нове</option>
-                    <option value="Сплачене">Сплачене</option>
-                    <option value="Відмінене">Відмінене</option>
+                    <option value="new" selected>Нове</option>
+                    <option value="paid">Сплачене</option>
+                    <option value="canceled">Відмінене</option>
                 </select>
                 <p class="formLabel">Опис:</p><textarea cols="50" rows="3" class="form-control" id="descriptionOrders"></textarea>
                 <p>* обов’язкові до заповнення поля. Клієнта вибрано, якщо нижче ви бачите ID клієнта: </p><h5 id="testClientsId"></h5>
