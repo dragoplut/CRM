@@ -80,19 +80,19 @@
             <div class="modal-header" id="headerEditOrder"></div>
             <div class="modal-body">
                 <input type="text" class="form-control formLabel" onclick="searchExistClient()" onkeyup="searchExistClient()" id="inputSearchExistClient" placeholder="Пошук*: пишіть тут">
-                <select class="form-control formInput" onchange="existClientId=value, showClientId()" id="selectorSearchExistClient">
+                <select class="form-control formInput" onchange="existClientId=value, showClientId()" onclick="existClientId=value, showClientId()" id="selectorSearchExistClient">
                     <option value="false">Клієнт</option>
                 </select>
-                <p class="formLabel">Назва замовлення*: </p><input type="text" class="form-control formInput" id="title">
-                <p class="formLabel">Ціна*: </p><input type="number" class="form-control formInput" id="price">
-                <p class="formLabel">Дата оплати: </p><input type="date" class="form-control formInput" id="payDate">
+                <p class="formLabel">Назва замовлення*: </p><input type="text" class="form-control formInput" id="titleOrder">
+                <p class="formLabel">Ціна*: </p><input type="number" class="form-control formInput" id="priceOrder">
+                <p class="formLabel">Дата оплати: </p><input type="datetime-local" class="form-control formInput" id="payDateOrder">
                 <p class="formLabel">Статус*: </p>
                 <select class="form-control formInput" onchange="statusOption=value" id="selectorOrderStatus">
-                    <option value="new" selected>Нове</option>
+                    <option value="new">Нове</option>
                     <option value="paid">Сплачене</option>
                     <option value="canceled">Відмінене</option>
                 </select>
-                <p class="formLabel">Опис:</p><textarea cols="50" rows="3" class="form-control" id="descriptionOrders"></textarea>
+                <p class="formLabel">Опис:</p><textarea cols="50" rows="3" class="form-control" id="descriptionOrders" placeholder="виберіть потрібний"></textarea>
                 <p>* обов’язкові до заповнення поля. Клієнта вибрано, якщо нижче ви бачите ID клієнта: </p><h5 id="testClientsId"></h5>
             </div>
             <div class="modal-footer" id="footerEditOrder"></div>
@@ -104,5 +104,6 @@
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/app.js"></script>
 <script type="text/javascript" src="/js/orders.js"></script>
+<script type="text/javascript" src="/js/moment.min.js"></script>
 </body>
 </html>
