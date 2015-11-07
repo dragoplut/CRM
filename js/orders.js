@@ -17,6 +17,7 @@ $("#searchRequestOrders").keypress(function(event){
 
 function clearFormOrder(){
     $("#inputSearchExistClient").val('');
+    $("#selectorSearchExistClient").val('');
     $("#titleOrder").val('');
     $("#priceOrder").val('');
     $("#payDateOrder").val('');
@@ -47,8 +48,9 @@ function editOrder(orderId){
             var lastName = '';
             for(var j = 0; j < clientsFullList.length; j++){
                 if(clientsFullList[j].id == allOrders[i].client){
-                    lastName = clientsFullList[j].lastName;
-                    existClientId = allOrders[i].client;
+                    lastName = clientsFullList[j].lastName + ' ' + clientsFullList[j].firstName;
+                    existClientId = clientsFullList[j].id;
+                    statusOption = allOrders[i].status;
                     showClientId();
                 }
             }
@@ -60,14 +62,13 @@ function editOrder(orderId){
             $("#payDateOrder").val(allOrders[i].payDate.replace('Z', ''));
             $("#selectorOrderStatus").val(allOrders[i].status);
             $("#descriptionOrders").val(allOrders[i].description);
+
+            console.log(moment(allOrders[i].payDate).format('L'));
         }
     }
     $("#headerEditOrder").html(headerRendered);
     $("#footerEditOrder").html(footerRendered);
-    searchExistClient();
     $("#newClientOrder").modal('show');
-
-    console.log('Редагувати замовлення');
 }
 
 function loadClientsFullList(){
@@ -84,19 +85,22 @@ function loadClientsFullList(){
 }
 
 function newOrder(){
-    existClientId = '';
+    existClientId = false;
     showClientId();
     var headerRendered = '<h4 class="text-center">Нове замовлення</h4>';
     var footerRendered = '<a class="btn btn-default pull-left" type="reset" onclick="clearFormOrder()">Очистити форму</a><a class="btn btn-default" data-dismiss="modal">Повернутись</a><a class="btn btn-primary" type="submit" id="newOrderBtn" onclick="newOrderSave()">Додати нове замовлення</a>';
     $("#headerEditOrder").html(headerRendered);
     $("#footerEditOrder").html(footerRendered);
     clearFormOrder();
+    statusOption = 'new';
     searchExistClient();
+    $("#selectorOrderStatus").val(statusOption);
+    $("#payDateOrder").val(moment().format('YYYY-MM-DD[T]HH:mm'));
     $("#newClientOrder").modal('show');
 }
 
 function newOrderSave(){
-    if (document.getElementById('selectorSearchExistClient').value != false & document.getElementById('titleOrder').value != false & document.getElementById('priceOrder').value != false){
+    if (existClientId != false & document.getElementById('titleOrder').value != false & document.getElementById('priceOrder').value != false){
         updateRESTnewOrder({title: document.getElementById('titleOrder').value, description: document.getElementById('descriptionOrders').value, price: document.getElementById('priceOrder').value, payDate: document.getElementById('payDateOrder').value, status: statusOption, client: existClientId});
     }
     else{
@@ -110,22 +114,37 @@ function ordersBase(){
         url: urlRequest,
         success: function(result){
             ordersLoaded(result);
+            console.log(result);
         }
     });
 }
 
 function ordersLoaded(data){
+    debugger;
     allOrders = data;
     $("#blankTrOrders").html(renderOrdersTable(data));
 }
 
-function renderDetailsOrder(){
-    console.log('Деталі замовлення');
+function renderDetailsOrder(orderId){
+    var orderRendered = '';
+    for (var i = 0; i < allOrders.length; i++){
+        if (allOrders[i].id === orderId){
+            var lastName = '';
+            var clientImgTemp = '';
+            for(var j = 0; j < clientsFullList.length; j++){
+                if(clientsFullList[j].id == allOrders[i].client){
+                    lastName = clientsFullList[j].lastName + ' ' + clientsFullList[j].firstName;
+                    clientImgTemp = clientsFullList[j].image;
+                }
+            }
+            orderRendered = '<div class="container fixMaxWith"><img class="bigImg modal-content" src="' + clientImgTemp + '"><h4 class="text-center">Клієнт - ' + lastName + '</h4><h4 class="text-center">Замовлення</h4><h5>ID: ' + allOrders[i].id + '</h5><h5>Назва: ' + allOrders[i].title + '</h5><h5>Статус: ' + allOrders[i].status + '</h5><h5>Опис: ' + allOrders[i].description + '</h5><h5>Ціна: ' + allOrders[i].price + '</h5><h5>Дата створення: ' + moment(allOrders[i].createdAt).format('L') + '</h5><h5>Дата редагування: ' + moment(allOrders[i].updatedAt).format('L') + '</h5><h5>Дата оплати: ' + moment(allOrders[i].payDate).format('L') + '</h5></div>';
+        }
+    }
+    $("#orderInfo").html(orderRendered);
 }
 
 function renderOrdersTable(data){
     allOrders = data;
-    console.log(allOrders);
     var blocks = [];
     for (var i = 0; i < allOrders.length; i++){
         var lastNameFirstName = '';
@@ -134,7 +153,6 @@ function renderOrdersTable(data){
             lastNameFirstName = clientsFullList[j].lastName + ' ' + clientsFullList[j].firstName;
             }
         }
-        console.log(lastNameFirstName);
         var template = '<tr class="success" id="' + allOrders[i].id + '"><td class="text-center"><a title="Детальніше" href="#orderDetailsForm" data-toggle="modal" onclick="renderDetailsOrder(\'' + allOrders[i].id + '\')"><span class="glyphicon glyphicon-file"></span></a><br><a title="Редагувати" href="#editOrder" data-toggle="modal" onclick="editOrder(\'' + allOrders[i].id + '\')"><span class="glyphicon glyphicon-pencil"></span></a><br><a title="Видалити" href="#" onclick="deleteOrder(\'' + allOrders[i].id + '\')"><span class="glyphicon glyphicon-trash"></span></a></td><td>' + allOrders[i].title + '</td><td datatype="number">' + allOrders[i].price + '</td><td datatype="date">' + moment(allOrders[i].payDate).format('L') + '</td><td>' + allOrders[i].status + '</td><td>' + lastNameFirstName + '</td></tr>';
         blocks += template;
     }
@@ -168,7 +186,6 @@ function saveOrderChanges(j){
     }else{
         alert('Ви не внесли змін, запис не оновлено!');
     }
-
 }
 
 function searchOrder(){
@@ -177,7 +194,6 @@ function searchOrder(){
 
 function searchExistClient(){
     var searchRequest = document.getElementById('inputSearchExistClient').value;
-    console.log(searchRequest);
     var optionExistClient = '';
     for (var i = 0; i < clientsFullList.length; i++){
         if (searchRequest){
@@ -206,9 +222,8 @@ function updateRESTnewOrder(addOrder){
         data: addOrder,
         success: function(result){
             allOrders = result;
-            loadClientsFullList();
-            ordersBase();
             alert('Нове замовлення успішно створено і додано в базу.');
+            newOrder();
         },
         error: function(){
             alert('Помилка при внесенні/оновленні даних на серврер!');
