@@ -120,7 +120,6 @@ function ordersBase(){
 }
 
 function ordersLoaded(data){
-    debugger;
     allOrders = data;
     $("#blankTrOrders").html(renderOrdersTable(data));
 }
